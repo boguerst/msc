@@ -118,7 +118,8 @@ angular.module('mscApp')
         /*if($scope.isRoomManager) {
             return;
         }*/
-        Session.setEvent(event._id);
+        Session.setEventId(event._id);
+        Session.setEventName(event.name);
         $location.path('/home');
     };
 

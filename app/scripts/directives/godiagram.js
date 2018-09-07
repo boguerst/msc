@@ -160,9 +160,9 @@ angular.module('mscApp')
 							new go.Binding("text", "name").makeTwoWay(),
 							new go.Binding("angle", "angle", function(n) { return -n; }))
 					),
-					new Seat(1, "0.2 0", "0.5 1"),
-					new Seat(2, "0.5 0", "0.5 1"),
-					new Seat(3, "0.8 0", "0.5 1")
+					new Seat('1', '0.2 0', "0.5 1"),
+					new Seat('2', '0.5 0', "0.5 1"),
+					new Seat('3', "0.8 0", "0.5 1")
 				));
 			diagram.nodeTemplateMap.add("TableR4",  // rectangular with 3 seats in a line
 				$(go.Node, "Spot", tableStyle(),
@@ -175,10 +175,10 @@ angular.module('mscApp')
 							new go.Binding("text", "name").makeTwoWay(),
 							new go.Binding("angle", "angle", function(n) { return -n; }))
 					),
-					new Seat(1, "0.5 0", "0.5 1"),
-					new Seat(2, "1 0.5", "0 0.5"),
-					new Seat(3, "0.5 1", "0.5 0"),
-					new Seat(4, "0 0.5", "1 0.5")
+					new Seat('1', "0.5 0", "0.5 1"),
+					new Seat('2', "1 0.5", "0 0.5"),
+					new Seat('3', "0.5 1", "0.5 0"),
+					new Seat('4', "0 0.5", "1 0.5")
 				));
 			diagram.nodeTemplateMap.add("TableR6",  // rectangular with 3 seats in a line
 				$(go.Node, "Spot", tableStyle(),
@@ -191,12 +191,12 @@ angular.module('mscApp')
 							new go.Binding("text", "name").makeTwoWay(),
 							new go.Binding("angle", "angle", function(n) { return -n; }))
 					),
-					new Seat(1, "0.2 0", "0.5 1"),
-					new Seat(2, "0.5 0", "0.5 1"),
-					new Seat(3, "0.8 0", "0.5 1"),
-					new Seat(4, "0.2 1", "0.5 0"),
-					new Seat(5, "0.5 1", "0.5 0"),
-					new Seat(6, "0.8 1", "0.5 0")
+					new Seat('1', "0.2 0", "0.5 1"),
+					new Seat('2', "0.5 0", "0.5 1"),
+					new Seat('3', "0.8 0", "0.5 1"),
+					new Seat('4', "0.2 1", "0.5 0"),
+					new Seat('5', "0.5 1", "0.5 0"),
+					new Seat('6', "0.8 1", "0.5 0")
 				));
 			diagram.nodeTemplateMap.add("TableR8",  // rectangular with 8 seats
 				$(go.Node, "Spot", tableStyle(),
@@ -209,14 +209,14 @@ angular.module('mscApp')
 				      		new go.Binding("text", "name").makeTwoWay(),
 				      		new go.Binding("angle", "angle", function(n) { return -n; }))
 				    ),
-				    new Seat(1, "0.2 0", "0.5 1"),
-				    new Seat(2, "0.5 0", "0.5 1"),
-				    new Seat(3, "0.8 0", "0.5 1"),
-				    new Seat(4, "1 0.5", "0 0.5"),
-				    new Seat(5, "0.8 1", "0.5 0"),
-				    new Seat(6, "0.5 1", "0.5 0"),
-				    new Seat(7, "0.2 1", "0.5 0"),
-				    new Seat(8, "0 0.5", "1 0.5")
+				    new Seat('1', "0.2 0", "0.5 1"),
+				    new Seat('2', "0.5 0", "0.5 1"),
+				    new Seat('3', "0.8 0", "0.5 1"),
+				    new Seat('4', "1 0.5", "0 0.5"),
+				    new Seat('5', "0.8 1", "0.5 0"),
+				    new Seat('6', "0.5 1", "0.5 0"),
+				    new Seat('7', "0.2 1", "0.5 0"),
+				    new Seat('8', "0 0.5", "1 0.5")
 				));
 
 			diagram.nodeTemplateMap.add("TableC8",  // circular with 8 seats
@@ -230,14 +230,14 @@ angular.module('mscApp')
 							new go.Binding("text", "name").makeTwoWay(),
 							new go.Binding("angle", "angle", function(n) { return -n; }))
 					),
-					new Seat(1, "0.50 0", "0.5 1"),
-					new Seat(2, "0.85 0.15", "0.15 0.85"),
-					new Seat(3, "1 0.5", "0 0.5"),
-					new Seat(4, "0.85 0.85", "0.15 0.15"),
-					new Seat(5, "0.50 1", "0.5 0"),
-					new Seat(6, "0.15 0.85", "0.85 0.15"),
-					new Seat(7, "0 0.5", "1 0.5"),
-					new Seat(8, "0.15 0.15", "0.85 0.85")
+					new Seat('1', "0.50 0", "0.5 1"),
+					new Seat('2', "0.85 0.15", "0.15 0.85"),
+					new Seat('3', "1 0.5", "0 0.5"),
+					new Seat('4', "0.85 0.85", "0.15 0.15"),
+					new Seat('5', "0.50 1", "0.5 0"),
+					new Seat('6', "0.15 0.85", "0.85 0.15"),
+					new Seat('7', "0 0.5", "1 0.5"),
+					new Seat('8', "0.15 0.15", "0.85 0.85")
 				));
 			// what to do when a drag-drop occurs in the Diagram's background
 			diagram.mouseDrop = function(e) {

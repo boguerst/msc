@@ -13,12 +13,12 @@ angular.module('mscApp')
     $scope.setCurrentUser();
 
     // var _evtId = $routeParams.evtId;
-    var _evtId = Session.event();
+    var _evtId = Session.eventId();
     if(!_evtId) {
     	$location.path('/myspace');
         return;
     }
-	
+	$scope.evtName = Session.eventName();
     $scope.isPlanView = true;
 
     $scope.titles = [
@@ -27,7 +27,9 @@ angular.module('mscApp')
     ];
 
     $scope.tables = [
-		{'key':1,'category':'TableR4','name':'Head 1','guests':{},'loc':'-91.50 -6.00'},
+		// {'key':'12323544645','category':'TableR4','name':'Head 1','guests':{"2":"testte frerf"},"loc":"-157.5 37"}
+		// {"_id":"5b7c5dd2532f4056ba959f25","title":"1","firstName":"testte","name":"frerf","phoneNumber":"09988979767","email":"iui@fr.fr","comment":"uiuguiuigygu","evtId":"5b7c59e5532f4056ba959f23","__v":0,"key":"testte frerf","selected":false,"loc":"-29 24","__gohashid":1610,"table":1,"seat":2},
+
 		/*{'key':2,'category':'TableR3','name':'Head 2','guests':{},'loc':'102.50 -15'},
 		{'key':3,'category':'TableR8','name':'3','guests':{},'loc':'-84.5 222.50'},
 		{'key':4,'category':'TableC8','name':'4','guests':{},'loc':'198.49 146.5'}*/
@@ -116,10 +118,10 @@ angular.module('mscApp')
 	/* ******* table ******** */
 
     var locX = 364.5, locY = 223.5;
-	var tableStd = {'key':-1, 'category':'TableC8', 'name':'4', 'guests':{}, 'loc':locX+' '+locY};
+	var tableStd = {'guests':{}};
 	$scope.addTable = function(tableId) {
     	var previousTables = angular.copy($scope.tables);
-		tableStd.key = $scope.tables.length+1;
+		tableStd.key = $scope.tables.length+1+'';
 		tableStd.category = 'Table'+tableId;
 		tableStd.name = tableStd.key + '';
 		tableStd.loc = (locX + 2*tableStd.key) + ' ' + (locY + 2*tableStd.key);
@@ -127,10 +129,6 @@ angular.module('mscApp')
 		previousTables.push(angular.copy(tableStd));
 		$scope.tables = previousTables;
 	};
-
-    $scope.saveModel = function() {
-    	// alert('Sauvez le model');
-    };
 
     var triggerTime = 0;
     $scope.triggerPosition = function() {
@@ -155,6 +153,46 @@ angular.module('mscApp')
     	setTimeout($scope.triggerPosition, 200);
     };
 
+    function saveGuest(guest) {
+    	ServiceAjax.guests().set(guest).then(function(data) {
+			console.log(data);
+        }, function(data) {
+            console.log('Error: ' + data);
+        });
+    }
+
+	function saveTable(table, idx) {
+		if(table._id) {
+			ServiceAjax.tables().set(table).then(function(data) {
+				console.log(data);
+	        }, function(data) {
+	            console.log('Error: ' + data);
+	        });
+		} else {
+			ServiceAjax.tables().create(table).then(function(data) {
+				console.log(data);
+				$scope.tables[idx]._id = data.data._id;
+	        }, function(data) {
+	            console.log('Error: ' + data);
+	        });
+		}
+	}   
+
+    $scope.saveMap = function() {
+    	console.log('save me');
+		$scope.tables.forEach(function(item, idx, tables) {
+			if(item.hasOwnProperty('guests')) {
+				saveTable(item, idx);
+			} else {
+				saveGuest(item);
+			}
+
+			if(idx === tables.length-1) {
+				console.log('saved');
+			}
+		});
+    };
+
 	$scope.isFullScreen = false;
 	$scope.goFullScreen = function(elt) {
 		$scope.isFullScreen = true;
@@ -170,36 +208,21 @@ angular.module('mscApp')
 
 	/* ******* watches ******** */
 
-	$scope.$watch('guests', function(newGuests, oldGuests) {
-		if (newGuests !== oldGuests) {
-			$scope.guestList = new go.GraphLinksModel(newGuests);
+	$scope.$watch('guests', function(new_, old_) {
+		if (new_ !== old_) {
+			$scope.guestList = new go.GraphLinksModel(new_);
 		}
 	});
-	
-	/*$scope.$watch(function($scope) {
-		return $scope.guests.
-			map(function(guest) {
-				return guest.selected;
-			});
-	}, function(newValue) {
-		if(newValue!==undefined) {
-			$scope.selectedGuests = newValue.map(function (guest) {
-				if(guest.selected) {
-					return guest._id;
-				}
-			});
-		}
-	}, true);*/
 
-	$scope.$watch('tables', function(newModel, oldModel) {
-		if (newModel !== oldModel) {
-			$scope.model = new go.GraphLinksModel(newModel);
+	$scope.$watch('tables', function(new_, old_) {
+		if (new_ !== old_) {
+			$scope.model = new go.GraphLinksModel(new_);
 		}
 	});
 
     /* ******* godiagram.js  ********* */
 
-	$scope.guestList = new go.GraphLinksModel();
+	$scope.guestList = new go.GraphLinksModel($scope.guests);
 
 	$scope.model = new go.GraphLinksModel($scope.tables);
 	$scope.model.selectedNodeData = null;

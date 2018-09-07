@@ -31,10 +31,16 @@ angular.module('mscApp')
   this.firstName = function() {
     return $window.sessionStorage.getItem('firstName');
   };
-  this.setEvent = function(evtId) {
+  this.setEventId = function(evtId) {
     $window.sessionStorage.setItem('eventId', evtId);
   };
-  this.event = function() {
+  this.eventId = function() {
     return $window.sessionStorage.getItem('eventId');
+  };
+  this.setEventName = function(evtName) {
+    $window.sessionStorage.setItem('eventName', evtName);
+  };
+  this.eventName = function() {
+    return $window.sessionStorage.getItem('eventName');
   };
 });

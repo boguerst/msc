@@ -75,6 +75,25 @@ angular.module('mscApp')
                 }
             };
         },
+        tables: function () {
+            return {
+                get: function (id) {
+                    url = SERVER_URL + 'api/table/' + (id || '');
+                    return $http.get(url, headers);
+                },
+                all: function () {
+                    return this.get();
+                },
+                set: function (table) {
+                    url = SERVER_URL + 'api/table';
+                    return $http.put(url, table, headers);
+                },
+                create: function (table) {
+                    url = SERVER_URL + 'api/table';
+                    return $http.post(url, table, headers);
+                }
+            };
+        },
         guests: function () {
             return {
                 get: function (id) {
@@ -91,6 +110,10 @@ angular.module('mscApp')
                 delete: function (id) {
                     url = SERVER_URL + 'api/guest/' + (id || '');
                     return $http.delete(url, headers);
+                },
+                set: function (guest) {
+                    url = SERVER_URL + 'api/guest';
+                    return $http.put(url, guest, headers);
                 }
             };
         },

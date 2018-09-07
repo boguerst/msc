@@ -2,13 +2,10 @@
   <div class="tab-content">
     <div id="homeBar" class="row">
       <div class="col-md-4">
-        <span ng-click="">SeatingChart</span>
-        <button class="btn btn-large btn-primary" type="submit" ng-click="">back</button>
-        <button class="btn btn-large btn-primary" type="submit" ng-click="">next</button>
-        <button class="btn btn-large btn-primary" type="submit" ng-click="">save</button>
+        <button class="btn btn-large btn-primary" ng-click="saveMap()">Sauvegarder</button>
       </div>
       <div class="col-md-2" style="margin-top: 7px;">
-        <span>Event Name</span>
+        <span>{{evtName}}</span>
       </div>
       <div class="btn-group col-md-3">
         <label class="btn btn-primary" id="DMBack" ng-class="{'active':!isFullScreen}">
