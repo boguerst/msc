@@ -26,17 +26,11 @@ angular.module('mscApp')
     	{'_id':2, 'label':'Madame'}
     ];
 
-    $scope.tables = [
-		// {'key':'12323544645','category':'TableR4','name':'Head 1','guests':{"2":"testte frerf"},"loc":"-157.5 37"}
-		// {"_id":"5b7c5dd2532f4056ba959f25","title":"1","firstName":"testte","name":"frerf","phoneNumber":"09988979767","email":"iui@fr.fr","comment":"uiuguiuigygu","evtId":"5b7c59e5532f4056ba959f23","__v":0,"key":"testte frerf","selected":false,"loc":"-29 24","__gohashid":1610,"table":1,"seat":2},
 
-		/*{'key':2,'category':'TableR3','name':'Head 2','guests':{},'loc':'102.50 -15'},
-		{'key':3,'category':'TableR8','name':'3','guests':{},'loc':'-84.5 222.50'},
-		{'key':4,'category':'TableC8','name':'4','guests':{},'loc':'198.49 146.5'}*/
-	];
+    $scope.map = {'guests': [], 'tables': []};
 
     $scope.guests = [];
-    var guestsOrigin = angular.copy($scope.guests);
+    $scope.guestsOrigin = angular.copy($scope.guests);
     ServiceAjax.guests().all(_evtId).then(function(data) {
         var guests = data.data;
         guests.forEach(function(guest) {
@@ -44,7 +38,22 @@ angular.module('mscApp')
         	guest.selected = false;
         });
         $scope.guests = guests;
-        guestsOrigin = angular.copy($scope.guests);
+        $scope.guestsOrigin = angular.copy($scope.guests);
+
+        $scope.map.guests = guests;
+    }, function(data) {
+        console.log('Error: ' + data);
+    });
+
+    $scope.tables = [];
+    ServiceAjax.tables().getByEvent(_evtId).then(function(data) {
+        var tables = data.data;
+        tables.forEach(function(table) {
+        	table.guests = {};
+        });
+        $scope.tables = tables;
+
+        $scope.map.tables = tables;
     }, function(data) {
         console.log('Error: ' + data);
     });
@@ -90,6 +99,7 @@ angular.module('mscApp')
 			function (newGuest) { //$uibModalInstance.close
 			    console.log(newGuest);
 			    $scope.guestList.addNodeData(newGuest);
+			    $scope.guestsOrigin.push(newGuest);
 			}, 
 			function (msg) {//$uibModalInstance.dismiss
 				console.log(msg);
@@ -98,11 +108,17 @@ angular.module('mscApp')
 	};
 
     $scope.deleteGuest = function(guest) {
-    	ServiceAjax.guests().delete(guest._id).then(function() {
+    	// $scope.guests.splice($scope.guests.indexOf(guest),1);
+    	// $scope.guestList.removeNodeData(guest._id);
+
+    	$scope.map.guests = $scope.map.guests.slice($scope.guests.indexOf(guest));
+    	// $scope.$apply();
+
+    	/*ServiceAjax.guests().delete(guest._id).then(function() {
             $scope.guests.splice($scope.guests.indexOf(guest),1);
         }, function(data) {
             console.log('Error: ' + data);
-        });
+        });*/
     };
 
     $scope.selectedGuests = [];
@@ -133,7 +149,7 @@ angular.module('mscApp')
     var triggerTime = 0;
     $scope.triggerPosition = function() {
     	var model = $scope.model;
-    	var data = model.findNodeDataForKey(guestsOrigin[0].key);
+    	var data = model.findNodeDataForKey($scope.guestsOrigin[0].key);
     	if(!data) {
     		model = $scope.guestList;
 			data = model.findNodeDataForKey($scope.guests[0].key);
@@ -208,13 +224,13 @@ angular.module('mscApp')
 
 	/* ******* watches ******** */
 
-	$scope.$watch('guests', function(new_, old_) {
+	$scope.$watch('map.guests', function(new_, old_) {
 		if (new_ !== old_) {
 			$scope.guestList = new go.GraphLinksModel(new_);
 		}
 	});
 
-	$scope.$watch('tables', function(new_, old_) {
+	$scope.$watch('map.tables', function(new_, old_) {
 		if (new_ !== old_) {
 			$scope.model = new go.GraphLinksModel(new_);
 		}

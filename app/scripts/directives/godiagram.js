@@ -11,9 +11,28 @@ angular.module('mscApp')
     return {
       template: '<div id="myDiagramDiv"></div>',
       restrict: 'E',
+	  // require: 'ngModel',
       replace: true,
         scope: { model: '=goModel', guestList: '=guestList' },
-        link: function(scope, element, attrs) {
+        link: function(scope, element, attrs, ngModelCtrl) {
+
+            // ngModelCtrl.$parsers.unshift(function(value) {
+            //     if (value) {
+            //         ngModelCtrl.$setValidity(ngModelCtrl.$name, false);
+            //         scope.errorMessage = 'This field has a value.'
+            //     } else {
+            //         ngModelCtrl.$setValidity(ngModelCtrl.$name, true);
+            //         scope.errorMessage = 'This field has no value.'
+            //     }
+            // });
+
+            // ngModelCtrl.$formatters.unshift(function(value) {
+            //     if (!value && ngModelCtrl.$dirty) {
+            //         ngModelCtrl.$setValidity(ngModelCtrl.$name, true);
+            //         scope.errorMessage = 'This field has no value.'
+            //     }
+            // });
+            
 			var $ = go.GraphObject.make;
 
 			// Automatically drag people Nodes along with the table Node at which they are seated.

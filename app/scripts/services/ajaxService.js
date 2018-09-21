@@ -82,7 +82,12 @@ angular.module('mscApp')
                     return $http.get(url, headers);
                 },
                 all: function () {
-                    return this.get();
+                    url = SERVER_URL + 'event';
+                    return $http.get(url, headers);
+                },
+                getByEvent: function (id) {
+                    url = SERVER_URL + 'table/event/' + (id || '');
+                    return $http.get(url, headers);
                 },
                 set: function (table) {
                     url = SERVER_URL + 'api/table';

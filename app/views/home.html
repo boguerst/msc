@@ -52,7 +52,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="guest in guests | orderBy:['firstName','name','title','position'] | searchedGuestFilter:searchedGuest" ng-click="">
+            <tr ng-repeat="guest in guestsOrigin | orderBy:['firstName','name','title','position'] | searchedGuestFilter:searchedGuest" ng-click="">
               <td><input class="form-check-input" type="checkbox" value="guest._id" ng-model="guest.selected"></td>
               <td><span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteGuest(guest)" style="cursor: pointer;"> </span></td>
               <td>{{guest.title | labelTitleFilter:titles}}</td>
@@ -95,7 +95,7 @@
         <div id="myGuests" style="border: solid 1px black"></div>
         <!-- a go-diagram element referring to the model, originally written as: -->
         <!-- &lt;go-diagram go-model="model" style="border: solid 1px blue; width:100%; height:400px"&gt;&lt;/go-diagram&gt; -->
-        <go-diagram go-model="model" guest-list="guestList" style="border: solid 1px black;"></go-diagram>
+        <go-diagram go-model="model" guest-list="guestList" ng-model="map" style="border: solid 1px black;"></go-diagram>
       </div>
       
       list guest : {{guestList.nodeDataArray}}
