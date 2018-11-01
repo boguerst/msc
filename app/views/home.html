@@ -1,13 +1,10 @@
 <div>
   <div class="tab-content">
     <div id="homeBar" class="row">
-      <div class="col-md-4">
-        <button class="btn btn-large btn-primary" ng-click="saveMap()">Sauvegarder</button>
-      </div>
-      <div class="col-md-2" style="margin-top: 7px;">
+      <div class="col-md-4" style="margin-top: 7px;">
         <span>{{evtName}}</span>
       </div>
-      <div class="btn-group col-md-3">
+      <div class="btn-group col-md-4">
         <label class="btn btn-primary" id="DMBack" ng-class="{'active':!isFullScreen}">
           <input type="radio" name="options" autocomplete="off" value="DMBack" ng-model="displayMode" ng-checked="!isFullScreen">Backend
         </label>
@@ -15,9 +12,11 @@
           <input type="radio" name="options" autocomplete="off" value="DMFront" ng-model="displayMode" ng-click="goFullScreen()" ng-checked="isFullScreen">Frontend
         </label>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
+        <button class="btn btn-large btn-primary" ng-click="saveMap()">Sauvegarder</button>
         <button class="btn btn-large btn-primary" type="submit" ng-click="">Print</button>
         <button class="btn btn-large btn-primary" type="submit">Import</button>
+        <span class="pull-right"> 14 tables et 30 places</span>
       </div>
     </div>
   </div>

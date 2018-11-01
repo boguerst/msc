@@ -130,7 +130,7 @@ angular
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = Auth.isAuthorized;
     $scope.flowSteps = FLOW_STEPS;
-    $scope.step = null;
+    $scope.step = FLOW_STEPS.login;
    
     $scope.setCurrentUser = function () {
       $scope.currentUser = {

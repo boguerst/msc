@@ -32,40 +32,46 @@
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
-          <div class="navbar-header">
-            <span style="font-size: 20px; text-align: center;">SeatingChart</span>
-          </div>
-
-          <div ng-if="step===flowSteps.login">
-            <div class="collapse navbar-collapse pull-right" id="header-navbar-menu">
-              <ul class="nav navbar-nav">
-                <li><a ng-href="#!/howItWork">Comment ça marche?</a></li>
-                <li><a ng-href="#!/ourServices">Nos services</a></li>
-                <li><a ng-href="#!/contactUs">Nous contacter</a></li>
-                <li><a ng-href="#!/aboutUs">A propos de nous</a></li>
-                <li><a ng-href="#!/login" style="background-color: #337ab7; color: white;">CONNEXION</a></li>
-                <li><a ng-href="#!/subscribe" style="background-color: #dd5347; color: white;">CRÉER UN COMPTE</a></li>
-              </ul>
+          <div class="row">
+            <div class="col-md-2" class="navbar-header">
+              <span style="font-size: 20px; text-align: center;">SeatingChart</span>
             </div>
-          </div>
 
-          <div ng-if="step!==flowSteps.login">
-            <div class="collapse navbar-collapse" id="header-navbar-menu">
-              <ul ng-show="step===flowSteps.main" class="nav navbar-nav role="tablist" id="myTabs"" style="margin-left: 30%;">
-                <li role="presentation"><a href="#guests">Invités</a></li>
-                <li role="presentation" class="active"><a href="#map">Map</a></li>
-              </ul>
-              <ul class="nav navbar-nav collapse navbar-collapse pull-right">
-                <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown">Bienvenue {{currentUser.firstName}} <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a ng-href="#!/profil">Mon profil</a></li>
-                    <li><a style="margin-top: 5px" type="submit" ng-click="logout()">Déconnexion</a></li>
-                    <li class="divider">exemple</li> 
+            <div class="col-md-10">
+              <div ng-if="step===flowSteps.login">
+                <div class="collapse navbar-collapse pull-right" id="header-navbar-menu1">
+                  <ul class="nav navbar-nav">
+                    <li><a ng-href="#!/howItWork">Comment ça marche?</a></li>
+                    <li><a ng-href="#!/ourServices">Nos services</a></li>
+                    <li><a ng-href="#!/contactUs">Nous contacter</a></li>
+                    <li><a ng-href="#!/aboutUs">A propos de nous</a></li>
+                    <li><a ng-href="#!/login" style="background-color: #337ab7; color: white;">CONNEXION</a></li>
+                    <li><a ng-href="#!/subscribe" style="background-color: #dd5347; color: white;">CRÉER UN COMPTE</a></li>
                   </ul>
-                </li>
-              </ul>
+                </div>
+              </div>
+
+              <div ng-if="step!==flowSteps.login">
+                <div class="collapse navbar-collapse" id="header-navbar-menu2">
+                  <div class="row">
+                    <ul ng-show="step===flowSteps.main" class="nav navbar-nav col-md-4" role="tablist" id="myTabs">
+                      <li role="presentation"><a href="#guests">Invités</a></li>
+                      <li role="presentation" class="active"><a href="#map">Map</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav collapse navbar-collapse pull-right col-md-4">
+                      <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Bienvenue {{currentUser.firstName}} <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a ng-href="#!/profil">Mon profil</a></li>
+                          <li><a style="margin-top: 5px" type="submit" ng-click="logout()">Déconnexion</a></li>
+                          <li class="divider">exemple</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -137,7 +143,15 @@
 
     <script>
       $(function(){
-        $('#header-navbar-menu > ul.navbar-nav li').click(function(e) {
+        $('#header-navbar-menu1 > ul.navbar-nav li').click(function(e) {
+          $('.navbar li.active').removeClass('active');
+          var $this = $(this);
+          if (!$this.hasClass('active')) {
+              $this.addClass('active');
+          }
+          // e.preventDefault();
+        });
+        $('#header-navbar-menu2 > ul.navbar-nav li').click(function(e) {
           $('.navbar li.active').removeClass('active');
           var $this = $(this);
           if (!$this.hasClass('active')) {
