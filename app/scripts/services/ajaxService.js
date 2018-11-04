@@ -78,11 +78,11 @@ angular.module('mscApp')
         tables: function () {
             return {
                 get: function (id) {
-                    url = SERVER_URL + 'api/table/' + (id || '');
+                    url = SERVER_URL + 'table/' + (id || '');
                     return $http.get(url, headers);
                 },
                 all: function () {
-                    url = SERVER_URL + 'event';
+                    url = SERVER_URL + 'table';
                     return $http.get(url, headers);
                 },
                 getByEvent: function (id) {
@@ -90,11 +90,11 @@ angular.module('mscApp')
                     return $http.get(url, headers);
                 },
                 set: function (table) {
-                    url = SERVER_URL + 'api/table';
+                    url = SERVER_URL + 'table';
                     return $http.put(url, table, headers);
                 },
                 create: function (table) {
-                    url = SERVER_URL + 'api/table';
+                    url = SERVER_URL + 'table';
                     return $http.post(url, table, headers);
                 }
             };

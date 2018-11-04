@@ -26,7 +26,6 @@ angular.module('mscApp')
     	{'_id':2, 'label':'Madame'}
     ];
 
-
     $scope.map = {'guests': [], 'tables': []};
 
     $scope.guests = [];
@@ -68,7 +67,7 @@ angular.module('mscApp')
         // currentTab = e.target.hash;
       });
 
-        $('a[href="#map"]').tab('show');
+      $('a[href="#map"]').tab('show');
 
       // trigger the selection on the dropdow "Add table"
       $('.dropdown-submenu a').on('click', function(e) {
@@ -134,9 +133,9 @@ angular.module('mscApp')
 	  /* ******* table ******** */
 
     var locX = 364.5, locY = 223.5;
-    var tableStd = {'guests':{}};
+    var tableStd = {'guests':{}, 'evtId': _evtId};
     $scope.addTable = function(tableId) {
-        var previousTables = angular.copy($scope.tables);
+      var previousTables = angular.copy($scope.tables);
       tableStd.key = $scope.tables.length+1+'';
       tableStd.category = 'Table'+tableId;
       tableStd.name = tableStd.key + '';
@@ -144,6 +143,7 @@ angular.module('mscApp')
       // tableStd.loc = previousTables[previousTables.length-1].loc;
       previousTables.push(angular.copy(tableStd));
       $scope.tables = previousTables;
+      $scope.map.tables = $scope.tables;
     };
 
     var triggerTime = 0;
@@ -171,26 +171,26 @@ angular.module('mscApp')
 
     function saveGuest(guest) {
     	ServiceAjax.guests().set(guest).then(function(data) {
-			console.log(data);
-        }, function(data) {
-            console.log('Error: ' + data);
-        });
+			  console.log(data);
+      }, function(data) {
+          console.log('Error: ' + data);
+      });
     }
 
     function saveTable(table, idx) {
       if(table._id) {
         ServiceAjax.tables().set(table).then(function(data) {
           console.log(data);
-            }, function(data) {
-                console.log('Error: ' + data);
-            });
+        }, function(data) {
+            console.log('Error: ' + data);
+        });
       } else {
         ServiceAjax.tables().create(table).then(function(data) {
           console.log(data);
           $scope.tables[idx]._id = data.data._id;
-          }, function(data) {
-              console.log('Error: ' + data);
-          });
+        }, function(data) {
+            console.log('Error: ' + data);
+        });
       }
     }
 

@@ -19,7 +19,7 @@ angular.module('mscApp')
         DONE: 3
     };
     $scope.eventState = $scope.EVENTSTATES.ALL;
-    
+
     $scope.newEvent = {};
     $scope.newEvent.startDate = new Date();
     ServiceAjax.rooms().all().then(function(data) {
@@ -51,20 +51,20 @@ angular.module('mscApp')
             fillEventsWithRooms(events);
         });
     }
-    
+
     $scope.createEvent = function(event) {
         event.by = $scope.currentUser._id;
         ServiceAjax.events().create(event).then(function(data) {
             event = data.data;
-            
+
             var mail = {};
             mail.contactEmail = event.bookerEmail;
             mail.contactMsg = event._id;
             mail.contactSubject = $scope.currentUser.firstName;
-            
+
             ServiceAjax.contacts().sendMail(mail).then(function(){
                 console.log('Sending done');
-            
+
                 if(event){
                     var modalInstance = $uibModal.open({
                       templateUrl: '../../views/infoPopup.html',
@@ -80,14 +80,14 @@ angular.module('mscApp')
                         function () { //$uibModalInstance.close
                             console.log($scope.newEvent);
                             $scope.newEvent = {};
-                            $scope.newEvent.startDate = new Date();
-                        }, 
+                            $scope.newEvent.startDate = new Date().toISOString().slice(0,10);
+                        },
                         function () {//$uibModalInstance.dismiss
                         }
                     );
                 }
             });
-            
+
             ServiceAjax.rooms().get(event.where).then(function(data) {
                 event.where = data.data.name;
                 $scope.events.push(event);
