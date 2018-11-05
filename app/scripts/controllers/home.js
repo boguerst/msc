@@ -28,31 +28,56 @@ angular.module('mscApp')
 
     $scope.map = {'guests': [], 'tables': []};
 
+    function groupBy(tableauObjets, prop1, prop2){
+      if(!tableauObjets) {
+        return {};
+      }
+      return tableauObjets.reduce(function (acc, obj) {
+        var cle = obj[prop1];
+        if(!acc[cle]){
+          acc[cle] = [];
+        }
+        acc[cle].push(prop2 ? obj[prop2] : obj);
+        return acc;
+      }, {});
+    }
+
+    $scope.tables = [];
     $scope.guests = [];
     $scope.guestsOrigin = angular.copy($scope.guests);
     ServiceAjax.guests().all(_evtId).then(function(data) {
-        var guests = data.data;
-        guests.forEach(function(guest) {
-        	guest.key = guest.firstName + ' ' + guest.name;
-        	guest.selected = false;
-        });
-        $scope.guests = guests;
-        $scope.guestsOrigin = angular.copy($scope.guests);
+      var guests = data.data;
+      guests.forEach(function(guest) {
+        guest.key = guest.firstName + ' ' + guest.name;
+        guest.selected = false;
+      });
+      $scope.guests = guests;
+      $scope.guestsOrigin = angular.copy($scope.guests);
 
-        $scope.map.guests = guests;
-    }, function(data) {
-        console.log('Error: ' + data);
-    });
-
-    $scope.tables = [];
-    ServiceAjax.tables().getByEvent(_evtId).then(function(data) {
+      var guestsMapTable = groupBy(guests, 'table');
+      ServiceAjax.tables().getByEvent(_evtId).then(function(data) {
         var tables = data.data;
+        var guestsOnTable = [];
         tables.forEach(function(table) {
-        	table.guests = {};
+          table.guests = guestsMapTable ? groupBy(guestsMapTable[table.key], 'seat', 'key') : {};
+          if(Object.keys(table.guests).length>0) {
+            guestsOnTable = guestsOnTable.concat(guestsMapTable[table.key]);
+          }
         });
         $scope.tables = tables;
 
-        $scope.map.tables = tables;
+        $scope.tables = $scope.tables.concat(guestsOnTable);
+        $scope.map.tables = $scope.tables;
+
+        guestsOnTable.forEach(function(guest1) {
+          $scope.guests = $scope.guests.filter(function(guest2) {
+            return guest2._id != guest1._id;
+          });
+        });
+        $scope.map.guests = $scope.guests;
+      }, function(data) {
+          console.log('Error: ' + data);
+      });
     }, function(data) {
         console.log('Error: ' + data);
     });
@@ -182,21 +207,21 @@ angular.module('mscApp')
         ServiceAjax.tables().set(table).then(function(data) {
           console.log(data);
         }, function(data) {
-            console.log('Error: ' + data);
+          console.log('Error: ' + data);
         });
       } else {
         ServiceAjax.tables().create(table).then(function(data) {
           console.log(data);
           $scope.tables[idx]._id = data.data._id;
         }, function(data) {
-            console.log('Error: ' + data);
+          console.log('Error: ' + data);
         });
       }
     }
 
     $scope.saveMap = function() {
     	console.log('save me');
-      $scope.tables.forEach(function(item, idx, tables) {
+      $scope.map.tables.forEach(function(item, idx, tables) {
         if(item.hasOwnProperty('guests')) {
           saveTable(item, idx);
         } else {
@@ -206,6 +231,10 @@ angular.module('mscApp')
         if(idx === tables.length-1) {
           console.log('saved');
         }
+      });
+
+      $scope.map.guests.forEach(function(guest) {
+        saveGuest(guest);
       });
     };
 
