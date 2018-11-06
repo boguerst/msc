@@ -42,7 +42,6 @@ angular.module('mscApp')
       }, {});
     }
 
-    $scope.tables = [];
     $scope.guests = [];
     $scope.guestsOrigin = angular.copy($scope.guests);
     ServiceAjax.guests().all(_evtId).then(function(data) {
@@ -64,10 +63,7 @@ angular.module('mscApp')
             guestsOnTable = guestsOnTable.concat(guestsMapTable[table.key]);
           }
         });
-        $scope.tables = tables;
-
-        $scope.tables = $scope.tables.concat(guestsOnTable);
-        $scope.map.tables = $scope.tables;
+        $scope.map.tables = tables.concat(guestsOnTable);
 
         guestsOnTable.forEach(function(guest1) {
           $scope.guests = $scope.guests.filter(function(guest2) {
@@ -160,15 +156,14 @@ angular.module('mscApp')
     var locX = 364.5, locY = 223.5;
     var tableStd = {'guests':{}, 'evtId': _evtId};
     $scope.addTable = function(tableId) {
-      var previousTables = angular.copy($scope.tables);
-      tableStd.key = $scope.tables.length+1+'';
+      var previousTables = angular.copy($scope.map.tables);
+      tableStd.key = $scope.map.tables.length+1+'';
       tableStd.category = 'Table'+tableId;
       tableStd.name = tableStd.key + '';
       tableStd.loc = (locX + 2*tableStd.key) + ' ' + (locY + 2*tableStd.key);
       // tableStd.loc = previousTables[previousTables.length-1].loc;
-      previousTables.push(angular.copy(tableStd));
-      $scope.tables = previousTables;
-      $scope.map.tables = $scope.tables;
+      previousTables.push(angular.copy(tableStd)); // Force the update on the diagram
+      $scope.map.tables = previousTables;
     };
 
     var triggerTime = 0;
@@ -212,7 +207,7 @@ angular.module('mscApp')
       } else {
         ServiceAjax.tables().create(table).then(function(data) {
           console.log(data);
-          $scope.tables[idx]._id = data.data._id;
+          $scope.map.tables[idx]._id = data.data._id;
         }, function(data) {
           console.log('Error: ' + data);
         });
@@ -268,7 +263,7 @@ angular.module('mscApp')
 
     $scope.guestList = new go.GraphLinksModel($scope.map.guests);
 
-    $scope.model = new go.GraphLinksModel($scope.tables);
+    $scope.model = new go.GraphLinksModel($scope.map.tables);
     $scope.model.selectedNodeData = null;
     $scope.replaceModel = function() {
       $scope.model = new go.GraphLinksModel(
