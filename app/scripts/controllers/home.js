@@ -220,7 +220,6 @@ angular.module('mscApp')
     }
 
     $scope.saveMap = function() {
-    	console.log('save me');
       $scope.map.tables.forEach(function(item, idx, tables) {
         if(item.hasOwnProperty('guests')) {
           saveTable(item, idx);
@@ -265,9 +264,9 @@ angular.module('mscApp')
       }
     });
 
-      /* ******* godiagram.js  ********* */
+    /* ******* godiagram.js  ********* */
 
-    $scope.guestList = new go.GraphLinksModel($scope.guests);
+    $scope.guestList = new go.GraphLinksModel($scope.map.guests);
 
     $scope.model = new go.GraphLinksModel($scope.tables);
     $scope.model.selectedNodeData = null;
