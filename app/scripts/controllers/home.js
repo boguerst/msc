@@ -43,20 +43,20 @@ angular.module('mscApp')
     }
 
     $scope.guests = [];
-    $scope.guestsOrigin = angular.copy($scope.guests);
+    let guestsRemoved = [];
+//    $scope.guests_ = angular.copy($scope.guests);
     ServiceAjax.guests().all(_evtId).then(function(data) {
-      var guests = data.data;
+      let guests = data.data;
       guests.forEach(function(guest) {
         guest.key = guest.firstName + ' ' + guest.name;
         guest.selected = false;
       });
       $scope.guests = guests;
-      $scope.guestsOrigin = angular.copy($scope.guests);
 
-      var guestsMapTable = groupBy(guests, 'table');
+      let guestsMapTable = groupBy(guests, 'table');
       ServiceAjax.tables().getByEvent(_evtId).then(function(data) {
-        var tables = data.data;
-        var guestsOnTable = [];
+        let tables = data.data;
+        let guestsOnTable = [];
         tables.forEach(function(table) {
           table.guests = guestsMapTable ? groupBy(guestsMapTable[table.key], 'seat', 'key') : {};
           if(Object.keys(table.guests).length>0) {
@@ -65,12 +65,13 @@ angular.module('mscApp')
         });
         $scope.map.tables = tables.concat(guestsOnTable);
 
+        let guests_ = angular.copy($scope.guests);
         guestsOnTable.forEach(function(guest1) {
-          $scope.guests = $scope.guests.filter(function(guest2) {
+          guests_ = guests_.filter(function(guest2) {
             return guest2._id != guest1._id;
           });
         });
-        $scope.map.guests = $scope.guests;
+        $scope.map.guests = guests_;
       }, function(data) {
           console.log('Error: ' + data);
       });
@@ -78,8 +79,38 @@ angular.module('mscApp')
         console.log('Error: ' + data);
     });
 
+    function updateGuests() {
+      let guestsMap = groupBy($scope.guests, '_id');
+
+      let tables = angular.copy($scope.map.tables);
+      tables.forEach(function(item) {
+        if(!item.hasOwnProperty('guests')) { //item is a guest
+          if(guestsMap[item._id]) {
+            guestsMap[item._id] = item;
+          } else {
+            tables.splice(tables.indexOf(item), 1);
+          }
+        }
+      });
+      $scope.map.tables = tables; //force the change on Angular
+
+      let guests = angular.copy($scope.map.guests);
+      guests.forEach(function(item) {
+        if(guestsMap[item._id]) {
+          guestsMap[item._id] = item;
+        } else {
+          guests.splice(guests.indexOf(item), 1);
+        }
+      });
+      $scope.map.guests = guests; //force the change on Angular
+    }
+
     function setMap() {
       $('#myTabs a').click(function (e) {
+        //update the guest list
+        this.getAttribute('href') === "#guests"; // click on guests tab
+        updateGuests();
+
         e.preventDefault();
         $(this).tab('show');
         $scope.isPlanView = $('.nav-tabs .active').text() === 'Orga Salle';
@@ -119,7 +150,7 @@ angular.module('mscApp')
         function (newGuest) { //$uibModalInstance.close
             console.log(newGuest);
             $scope.guestList.addNodeData(newGuest);
-            $scope.guestsOrigin.push(newGuest);
+            $scope.guests.push(newGuest);
         },
         function (msg) {//$uibModalInstance.dismiss
           console.log(msg);
@@ -128,17 +159,8 @@ angular.module('mscApp')
     };
 
     $scope.deleteGuest = function(guest) {
-    	// $scope.guests.splice($scope.guests.indexOf(guest),1);
-    	// $scope.guestList.removeNodeData(guest._id);
-
-    	$scope.map.guests = $scope.map.guests.slice($scope.guests.indexOf(guest));
-    	// $scope.$apply();
-
-    	/*ServiceAjax.guests().delete(guest._id).then(function() {
-            $scope.guests.splice($scope.guests.indexOf(guest),1);
-        }, function(data) {
-            console.log('Error: ' + data);
-        });*/
+    	 $scope.guests.splice($scope.guests.indexOf(guest), 1);
+    	 guestsRemoved.push(guest);
     };
 
     $scope.selectedGuests = [];
@@ -169,7 +191,7 @@ angular.module('mscApp')
     var triggerTime = 0;
     $scope.triggerPosition = function() {
     	var model = $scope.model;
-    	var data = model.findNodeDataForKey($scope.guestsOrigin[0].key);
+    	var data = model.findNodeDataForKey($scope.guests[0].key);
     	if(!data) {
     		model = $scope.guestList;
         data = model.findNodeDataForKey($scope.guests[0].key);
@@ -189,12 +211,20 @@ angular.module('mscApp')
     	setTimeout($scope.triggerPosition, 200);
     };
 
-    function saveGuest(guest) {
-    	ServiceAjax.guests().set(guest).then(function(data) {
-			  console.log(data);
-      }, function(data) {
-          console.log('Error: ' + data);
-      });
+    function saveGuest(guest, toRemove) {
+      if(toRemove) {
+        ServiceAjax.guests().delete(guest._id).then(function(data) {
+          console.log(data);
+        }, function(data) {
+            console.log('Error: ' + data);
+        });
+      } else {
+        ServiceAjax.guests().set(guest).then(function(data) {
+          console.log(data);
+        }, function(data) {
+            console.log('Error: ' + data);
+        });
+      }
     }
 
     function saveTable(table, idx) {
@@ -215,8 +245,10 @@ angular.module('mscApp')
     }
 
     $scope.saveMap = function() {
+      updateGuests();
+
       $scope.map.tables.forEach(function(item, idx, tables) {
-        if(item.hasOwnProperty('guests')) {
+        if(item.hasOwnProperty('guests')) { //it is a table
           saveTable(item, idx);
         } else {
           saveGuest(item);
@@ -230,18 +262,22 @@ angular.module('mscApp')
       $scope.map.guests.forEach(function(guest) {
         saveGuest(guest);
       });
+
+      guestsRemoved.forEach(function(guest) {
+        saveGuest(guest, true);
+      });
     };
 
     $scope.isFullScreen = false;
     $scope.goFullScreen = function(elt) {
       $scope.isFullScreen = true;
       elt = elt || document.getElementById('myFlexDiv');
-        if (elt.mozRequestFullScreen) {
+      if (elt.mozRequestFullScreen) {
         elt.mozRequestFullScreen();
-        } else if (elt.webkitRequestFullScreen) {
+      } else if (elt.webkitRequestFullScreen) {
         elt.webkitRequestFullScreen();
-        }
-        $scope.displayMode = 'DMBack';
+      }
+      $scope.displayMode = 'DMBack';
       $scope.isFullScreen = false;
     };
 
