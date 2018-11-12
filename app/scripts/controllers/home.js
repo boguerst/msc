@@ -106,20 +106,13 @@ angular.module('mscApp')
     }
 
     function setMap() {
-      $('#myTabs a').click(function (e) {
-        //update the guest list
-        this.getAttribute('href') === "#guests"; // click on guests tab
-        updateGuests();
-
-        e.preventDefault();
-        $(this).tab('show');
-        $scope.isPlanView = $('.nav-tabs .active').text() === 'Orga Salle';
-        $scope.$apply();
-
-        // currentTab = e.target.hash;
+      $('ul.navbar-nav li a[href^="#_"]').click(function(e) {
+          e.preventDefault();
+          //update the guest list
+          updateGuests();
+          $(this).tab('show');
       });
-
-      $('a[href="#map"]').tab('show');
+      $('a[href="#_map"]').tab('show');
 
       // trigger the selection on the dropdow "Add table"
       $('.dropdown-submenu a').on('click', function(e) {
