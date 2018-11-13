@@ -6,7 +6,7 @@
 }
 
 body {
-  min-height: 2000px;
+  min-height: 650px;
   padding-top: 70px;
 }
 
@@ -38,7 +38,33 @@ body {
 
 /* Custom page footer */
 .footer {
-  color: #777;
+  color: #fbf8f8;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 12px;
+}
+.footer a {
+  cursor: pointer;
+}
+.footer .row {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.footer .first {
+  background-color: #b1c0eb;
+}
+.footer .first a {
+  color: #1181e6;
+}
+.footer .second {
+  background-color: #1950d8;
+  text-align: left;
+}
+.footer .second span {
+  font-weight: bold;
+}
+.footer .third {
+  background-color: #1431af;
 }
 
 /* Responsive: Portrait tablets and up */
