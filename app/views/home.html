@@ -14,8 +14,12 @@
       </div>
       <div class="col-md-3">
         <button class="btn btn-large btn-primary" ng-click="saveMap()">Sauvegarder</button>
-        <button class="btn btn-large btn-primary" ng-click="">Print</button>
-        <button class="btn btn-large btn-primary">Import</button>
+        <button class="btn btn-large btn-primary">Print</button>
+        <!--<label class="btn btn-primary">
+          Importer&hellip; <input type="file" style="display: none;">
+        </label>-->
+        <!--<input type="file" id ="importFile" />-->
+        <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#importModal">Importer</button>
       </div>
       <div class="col-md-1">
         <span> 14 tables <br> 30 places</span>
@@ -120,6 +124,32 @@
       since the "goDiagram" directive watches that property for changes.
       </p>
       <button ng-click="replaceModel()">Replace Model</button>
+    </div>
+  </div>
+  <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="importModalLabel">Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <label class="input-group-btn">
+            <span class="btn btn-primary">
+                Browse&hellip; <input type="file" style="display: none;" multiple>
+            </span>
+            </label>
+            <input class="form-control" readonly>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" ng-click="import()">Valider</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

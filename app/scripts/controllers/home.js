@@ -44,7 +44,6 @@ angular.module('mscApp')
 
     $scope.guests = [];
     let guestsRemoved = [];
-//    $scope.guests_ = angular.copy($scope.guests);
     ServiceAjax.guests().all(_evtId).then(function(data) {
       let guests = data.data;
       guests.forEach(function(guest) {
@@ -124,10 +123,52 @@ angular.module('mscApp')
     setMap();
 
     /* ******* methods ******** */
+    var file;
+    $(function() {
+      // We can attach the `fileselect` event to all file inputs on the page
+      $(document).on('change', ':file', function() {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+        file = input.get(0).files[0];
+      });
+
+      // We can watch for our custom `fileselect` event like this
+      $(document).ready( function() {
+        $(':file').on('fileselect', function(event, numFiles, label) {
+            var input = $(this).parents('.input-group').find(':text');
+            var log = numFiles > 1 ? numFiles + ' files selected' : label;
+            if(input.length) {
+              input.val(log);
+            } else {
+              if(log) alert(log);
+            }
+        });
+      });
+    });
+    $scope.import = function() {
+      if(file) {
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(file);
+        reader.onload = function(e) {
+          var data = new Uint8Array(reader.result);
+//          var wb = XLSX.read(data, {type: 'array'});
+//
+//          var htmlstr = XLSX.write(wb, {sheet: 'sheet', type:'binary', bookType: 'html'});
+//          $('#wrapper')[0].innerHTML += htmlstr;
+          $('#importModal').modal('hide');
+        };
+        reader.onerror = function(e) {
+          alert('Fichier non supporté');
+        };
+        reader.onabort = function(e) {
+          alert('Fichier non supporté');
+        };
+      }
+    };
 
     /* ******* guest ******** */
-
-    // add a new guest
     $scope.addGuest = function() {
 	    var modalInstance = $uibModal.open({
         templateUrl: '../../views/newGuestPopup.html',
@@ -156,54 +197,6 @@ angular.module('mscApp')
     	 guestsRemoved.push(guest);
     };
 
-    $scope.selectedGuests = [];
-    $scope.isSelectedAllGuests = false;
-    $scope.toggleAllGuests = function(isSelectedAllGuests) {
-    	$scope.guests.forEach(function(guest) {
-			guest.selected = isSelectedAllGuests;
-    	});
-
-    	$scope.isSelectedAllGuests = isSelectedAllGuests;
-    };
-
-	  /* ******* table ******** */
-
-    var locX = 364.5, locY = 223.5;
-    var tableStd = {'guests':{}, 'evtId': _evtId};
-    $scope.addTable = function(tableId) {
-      var previousTables = angular.copy($scope.map.tables);
-      tableStd.key = $scope.map.tables.length+1+'';
-      tableStd.category = 'Table'+tableId;
-      tableStd.name = tableStd.key + '';
-      tableStd.loc = (locX + 2*tableStd.key) + ' ' + (locY + 2*tableStd.key);
-      // tableStd.loc = previousTables[previousTables.length-1].loc;
-      previousTables.push(angular.copy(tableStd)); // Force the update on the diagram
-      $scope.map.tables = previousTables;
-    };
-
-    var triggerTime = 0;
-    $scope.triggerPosition = function() {
-    	var model = $scope.model;
-    	var data = model.findNodeDataForKey($scope.guests[0].key);
-    	if(!data) {
-    		model = $scope.guestList;
-        data = model.findNodeDataForKey($scope.guests[0].key);
-        if(!data) {
-          return;
-        }
-    	}
-
-    	triggerTime++;
-      if(triggerTime === 10) {
-        triggerTime = 0;
-        return;
-      }
-
-    	setTimeout(function(){ model.setDataProperty(data, 'fill', 'green'); }, 100);
-    	setTimeout(function(){ model.setDataProperty(data, 'fill', 'blanchedalmond'); }, 200);
-    	setTimeout($scope.triggerPosition, 200);
-    };
-
     function saveGuest(guest, toRemove) {
       if(toRemove) {
         ServiceAjax.guests().delete(guest._id).then(function(data) {
@@ -219,6 +212,30 @@ angular.module('mscApp')
         });
       }
     }
+
+    $scope.selectedGuests = [];
+    $scope.isSelectedAllGuests = false;
+    $scope.toggleAllGuests = function(isSelectedAllGuests) {
+    	$scope.guests.forEach(function(guest) {
+			guest.selected = isSelectedAllGuests;
+    	});
+
+    	$scope.isSelectedAllGuests = isSelectedAllGuests;
+    };
+
+	  /* ******* table ******** */
+    var locX = 364.5, locY = 223.5;
+    var tableStd = {'guests':{}, 'evtId': _evtId};
+    $scope.addTable = function(tableId) {
+      var previousTables = angular.copy($scope.map.tables);
+      tableStd.key = $scope.map.tables.length+1+'';
+      tableStd.category = 'Table'+tableId;
+      tableStd.name = tableStd.key + '';
+      tableStd.loc = (locX + 2*tableStd.key) + ' ' + (locY + 2*tableStd.key);
+      // tableStd.loc = previousTables[previousTables.length-1].loc;
+      previousTables.push(angular.copy(tableStd)); // Force the update on the diagram
+      $scope.map.tables = previousTables;
+    };
 
     function saveTable(table, idx) {
       if(table._id) {
@@ -261,6 +278,30 @@ angular.module('mscApp')
       });
     };
 
+    var triggerTime = 0;
+    $scope.triggerPosition = function() {
+    	var model = $scope.model;
+    	var data = model.findNodeDataForKey($scope.guests[0].key);
+    	if(!data) {
+    		model = $scope.guestList;
+        data = model.findNodeDataForKey($scope.guests[0].key);
+        if(!data) {
+          return;
+        }
+    	}
+
+    	triggerTime++;
+      if(triggerTime === 10) {
+        triggerTime = 0;
+        return;
+      }
+
+    	setTimeout(function(){ model.setDataProperty(data, 'fill', 'green'); }, 100);
+    	setTimeout(function(){ model.setDataProperty(data, 'fill', 'blanchedalmond'); }, 200);
+    	setTimeout($scope.triggerPosition, 200);
+    };
+
+    /* ******* screen ******** */
     $scope.isFullScreen = false;
     $scope.goFullScreen = function(elt) {
       $scope.isFullScreen = true;
