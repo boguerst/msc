@@ -1,15 +1,87 @@
-#contactus > div.row {
-	height: 400px;
-}
 
-#contactus > div.row > div.span6 {
-	width: 45%;
-	text-align: left;
-}
-
-#CU-leftSide {
+#contactus
+#contactus .leftLine {
 	height: 100%;
 	border-right-style: solid;
 	border-right-width: 1px;
 	border-right-color: blue;
+}
+
+#contactus .row h4 {
+  color: #cf6515;
+}
+
+#contactus form input {
+  margin-bottom: 10px;
+}
+
+#contactus .form-signin input[type="email"] {
+  text-align: left;
+}
+
+.vl {
+  border-left: 1px solid #2929f5;
+  height: 370px;
+  position: absolute;
+  left: 50%;
+}
+
+.middle {
+  position: absolute;
+  left: 45%;
+  margin-top: 100%;
+  background-color: white;
+}
+
+@media only screen and (min-width : 768px) {
+  .is-table-row {
+    display: table;
+  }
+  .is-table-row [class*="col-md"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+  }
+}
+
+.is-table-row .box {
+  background: none;
+  position: static;
+}
+.is-table-row [class*="col-"] {
+  background: #fff;
+}
+
+.pull-bottom {
+  position: absolute;
+  top: 150%;;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (max-width: 1000px) {
+  .vl {
+    border-top: 1px solid #2929f5;
+    border-left: 0px;
+    height: 0px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    margin-top: 10px;
+  }
+
+  .middle {
+    position: absolute;
+    left: 45%;
+    margin-top: 0px;
+    background-color: white;
+  }
+
+  #contactus form {
+    margin-top: 25px;
+  }
+
+  .pull-bottom {
+    position: initial;
+    top: 0%;;
+  }
 }
