@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="styles/howitwork.css">
     <link rel="stylesheet" href="styles/ourservices.css">
     <link rel="stylesheet" href="styles/contactus.css">
+    <link rel="stylesheet" href="styles/aboutus.css">
 
     <link rel="stylesheet" href="styles/myspace.css">
     <link rel="stylesheet" href="styles/home.css">
@@ -45,13 +46,13 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">EVENTYS</a>
+            <a class="navbar-brand" href="#" style="color: #cf6515;">EVENTYS</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav" role="tablist">
               <!--<li ng-show="step===flowSteps.login"><a href="#">Home</a></li>-->
               <li ng-show="step===flowSteps.login" class="active"><a ng-href="#!/howItWork">Comment ça marche?</a></li>
-              <li ng-show="step===flowSteps.login"><a ng-href="#!/ourServices">Nos services</a></li>
+              <!--<li ng-show="step===flowSteps.login"><a ng-href="#!/ourServices">Nos services</a></li>-->
               <li ng-show="step===flowSteps.login"><a ng-href="#!/contactUs">Nous contacter</a></li>
               <li ng-show="step===flowSteps.login"><a ng-href="#!/aboutUs">À propos de nous</a></li>
               <!--<li class="dropdown">
@@ -167,6 +168,8 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/js-xlsx/dist/xlsx.full.min.js"></script>
     <script src="bower_components/file-saver/dist/FileSaver.min.js"></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBivhEaLebOwZmguQz7RCfSWPYZP0wJ2Ak&signed_in=true&callback=initMap"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

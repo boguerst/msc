@@ -1,4 +1,8 @@
 
+#ourservices span {
+  color: #cf6515;
+}
+
 #ourservices img {
   width: "150px";
   height: "150px";
@@ -11,9 +15,5 @@
 }
 
 #ourservices .row h3 {
-  color: #cf6515;
-}
-
-#ourservices .row span {
   color: #cf6515;
 }

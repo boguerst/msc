@@ -1,5 +1,4 @@
 
-#contactus
 #contactus .leftLine {
 	height: 100%;
 	border-right-style: solid;
@@ -17,6 +16,25 @@
 
 #contactus .form-signin input[type="email"] {
   text-align: left;
+}
+
+#contactus div .icon {
+  background-size: 20px 20px;
+  height: 20px;
+  width: 20px;
+  float: left;
+}
+
+#contactus div .icon.icon_fcbk {
+  background-image: url(../images/icon_fcbk.png);
+}
+
+#contactus div .icon.icon_tweeter {
+  background-image: url(../images/icon_tweeter.png);
+}
+
+#contactus div .icon.icon_wa {
+  background-image: url(../images/icon_wa.png);
 }
 
 .vl {

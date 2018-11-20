@@ -11,6 +11,14 @@
   max-width: 100%;
 }
 
+#howitwork h2 {
+  text-align: center;
+}
+
+#howitwork h3 {
+  color: #000;
+}
+
 #howitwork h4 {
   font-weight: bold;
 }
@@ -28,17 +36,17 @@
 }
 
 #howitwork div .icon.icon_evt {
-  background-image: url(../images/ourServices2.png);
+  background-image: url(../images/icon_evt.png);
   left: 25%;
 }
 
 #howitwork div .icon.icon_room {
-  background-image: url(../images/ourServices2.png);
+  background-image: url(../images/icon_room.png);
   left: 33%;
 }
 
 #howitwork div .icon.icon_country {
-  background-image: url(../images/ourServices2.png);
+  background-image: url(../images/icon_country.png);
   left: 35%;
 }
 
