@@ -6,6 +6,7 @@
   width: 100%;
   justify-content: center;
 }
+
 @media (min-width: 768px) {
   #myGuests {
     width: 100px;
@@ -17,6 +18,7 @@
     flex: 1;
   }
 }
+
 @media (max-width: 767px) {
   #myGuests {
     width: 90%;
@@ -57,7 +59,20 @@ min-width: 80px;
   margin-top: -1px;
 }
 
-#guestTable th, #guestTable td {
-  text-align:center; 
-  vertical-align:middle;
+#home span {
+  color: #cf6515;
+}
+
+#home img {
+  width: 30%;
+}
+
+#home .guestBlock {
+  border: 1px solid #e6e6e6;
+  padding: 5px;
+  margin-bottom: 8px;
+  margin-right: 0px;
+  margin-left: 0px;
+  box-shadow: 8px 8px 12px #aaa;
+	cursor: pointer;
 }

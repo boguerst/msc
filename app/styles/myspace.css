@@ -14,13 +14,10 @@
   margin-right: 0px;
   margin-left: 0px;
   box-shadow: 8px 8px 12px #aaa;
-}
-
-#myspace tr {
 	cursor: pointer;
 }
 
-#eventTable th, #eventTable td {
-  text-align:center;
-  vertical-align:middle;
+#myspace .map {
+  height: 100%;
+  border: 1px solid #e6e6e6;
 }

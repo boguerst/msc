@@ -1,4 +1,4 @@
-<div>
+<div id="home">
   <div class="tab-content">
     <div id="homeBar" class="row">
       <div class="col-md-5" style="margin-top: 7px;">
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div>
-        <table id="guestTable" class="table table-bordered table-sm table-striped table-hover">
+        <!--<table id="guestTable" class="table table-bordered table-sm table-striped table-hover">
           <thead>
             <tr>
               <th><input class="form-check-input" type="checkbox" value="" ng-click="toggleAllGuests(!isSelectedAllGuests)"></th>
@@ -69,7 +69,27 @@
               <td>{{guest.comment}}</td>
             </tr>
           </tbody>
-        </table>
+        </table>-->
+        <div class="row guestBlock" ng-repeat="guest in guests | orderBy:['firstName','name','title','position'] | searchedGuestFilter:searchedGuest" ng-click="">
+          <div class="col-md-1">
+            <!--<img src="../images/icon_female.png" alt="">-->
+            <i class="glyphicon glyphicon-user"></i>
+          </div>
+          <div class="col-md-3">
+            {{guest.name}} {{guest.firstName}}
+          </div>
+          <div class="col-md-2">
+            {{guest.phoneNumber}}
+          </div>
+          <div class="col-md-2">
+            {{guest.email}}
+          </div>
+          <div class="col-md-3">
+            {{guest.table}} - {{guest.seat}}
+          </div>
+          <div class="col-md-1">
+          </div>
+        </div>
       </div>
     </div>
     <div role="tabpanel" class="tab-pane active" id="_map">
@@ -111,7 +131,7 @@
       <br />
       Alpha node location: {{model.findNodeDataForKey(1).loc}}
       <br />
-      Selected node: {{model.selectedNodeData.key}}  <input type="text" ng-model="model.selectedNodeData.name"></input>
+      Selected node: {{model.selectedNodeData.key}} <input ng-model="model.selectedNodeData.name"/>
       <br />
       Number of link data: {{model.linkDataArray.length}}
       <br/>
