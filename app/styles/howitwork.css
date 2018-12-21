@@ -7,24 +7,16 @@
   border: 0px;
 }
 
+#howitwork .row {
+  margin-top: 25px;
+}
+
 #howitwork img {
   max-width: 100%;
 }
 
-#howitwork h2 {
-  text-align: center;
-}
-
-#howitwork h3 {
-  color: #000;
-}
-
 #howitwork h4 {
   font-weight: bold;
-}
-
-#howitwork span {
-  color: #cf6515;
 }
 
 #howitwork div .icon {

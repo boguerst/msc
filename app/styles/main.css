@@ -36,6 +36,36 @@ body {
   /*border-color: #78FA89;*/
 }
 
+#navbar ul.navbar-nav li a {
+  color: #cf6515;
+}
+
+#myCarousel {
+  top: -18px;
+}
+
+.menuTab {
+  margin-top: 50px;
+}
+
+.menuTab h2 {
+  font-size: 45px;
+  color: #000;
+  margin-bottom: 60px;
+}
+
+.menuTab h2 span {
+  color: #cf6515;
+}
+
+.menuTab h3 {
+  font-size: 35px;
+}
+
+.menuTab h3 span {
+  color: #cf6515;
+}
+
 /* Custom page footer */
 .footer {
   color: #FFFFFF;

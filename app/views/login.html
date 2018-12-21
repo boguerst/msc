@@ -1,14 +1,15 @@
 <div class="container">
 	<iframe src="./sink.html" name="sink" style="display:none"></iframe>
 
-	<form name="loginForm" class="css-form form-signin form-signin-login" 
-	action="sink.html" method="post" target="sink" ng-submit="submitLogin(credentials)" 
+	<form name="loginForm" class="css-form form-signin form-signin-login"
+	action="sink.html" method="post" target="sink" ng-submit="submitLogin(credentials)"
 	novalidate form-autofill-fix>
 		<label>Faites de votre mariage le plus beau jour de votre vie et celui de vos proches</label>
 		<input type="email" name="email" class="form-control" placeholder="Email" ng-model="credentials.email" required>
 		<input type="password" name="password" class="form-control" placeholder="Mot de passe" ng-model="credentials.password" required>
 
-		<button class="btn btn-large btn-primary" type="submit" ng-disabled="loginForm.$invalid">Connexion</button>
+    <button class="btn btn-large btn-primary" ng-disabled="loginForm.$invalid">Connexion</button>
+    &nbsp;&nbsp;<a href="#!/subscribe">Créer un compte</a>
 	</form>
 
 	<div ng-if="currentUser">Welcome, {{ currentUser.firstName }}</div>

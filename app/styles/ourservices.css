@@ -16,3 +16,7 @@
 #ourservices .row h3 {
   color: #cf6515;
 }
+
+#ourservices .row p {
+  font-size: 22px;
+}

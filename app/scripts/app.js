@@ -83,10 +83,10 @@ angular
           authorizedRoles: [USER_ROLES.admin, USER_ROLES.planner]
         }
       })
-      .when('/profil', {
+      .when('/myprofil', {
         templateUrl: 'views/profil.html',
         controller: 'ProfilCtrl',
-        controllerAs: 'profil',
+        controllerAs: 'myprofil',
         data: {
           authorizedRoles: [USER_ROLES.admin, USER_ROLES.owner, USER_ROLES.planner]
         }
@@ -114,11 +114,11 @@ angular
         if (Auth.isAuthenticated()) {
           // user is not allowed
           $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-          alert('Désolé, vous n avez pas les droits pour cette action.');
+          alert('Désolé, vous n\'avez pas les droits pour cette action.');
         } else {
           // user is not logged in
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-          alert('SVP, veuillez vous authentifier.');
+          alert('Error lors de l\'authentification, veuillez réesssayer.');
           $location.path('/login');
         }
       }
@@ -130,9 +130,8 @@ angular
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = Auth.isAuthorized;
     $scope.flowSteps = FLOW_STEPS;
-    $scope.step = FLOW_STEPS.login;
-   
-    $scope.setCurrentUser = function () {
+
+    $scope.setCurrentUser = function() {
       $scope.currentUser = {
         '_id': Session.userId(),
         'role': Session.role(),
@@ -140,14 +139,20 @@ angular
       };
     };
 
-    $scope.setStep = function (step) {
-      $scope.step = step;
-    };
-
-    $scope.logout = function () {
+    $scope.logout = function() {
       Auth.logout();
       $scope.currentUser = null;
-      $scope.step = FLOW_STEPS.login;
-      $location.path("/");
+      Session.setStep(FLOW_STEPS.login);
+      $location.path('/');
+    };
+
+    $scope.getStep = function() {
+      return Session.step();
+    };
+
+    $scope.actionMenuButton = false;
+    $scope.toggleActionMenuButton = function() {
+      $scope.actionMenuButton = !$scope.actionMenuButton;
+      return $scope.actionMenuButton;
     };
   });

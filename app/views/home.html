@@ -1,5 +1,76 @@
 <div id="home">
-  <div class="tab-content">
+  <h2><span>></span> {{event.name}}</h2>
+  <br>
+  <div class="row form-group">
+    <div class="col-xs-5">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Date :</label>
+        </div>
+        <div class="col-xs-4">
+          <!--<div class="input-group">
+            <input class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="event.startDate" is-open="popup.opened" datepicker-options="dateOptions" close-text="Close" />
+            <span class="input-group-btn" style="padding-bottom: 10px;">
+              <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </div>-->
+          <input class="form-control" ng-model="event.startDate | date : 'dd/MM/yyyy'" disabled>
+        </div>
+        <div class="col-xs-2">
+          <input class="form-control" ng-model="event.startDate | date : 'hh'" disabled>
+        </div>
+        <div class="col-xs-2">
+          <input class="form-control" ng-model="event.startDate | date : 'mm'" disabled>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <label for="ex2">Nombre d'invités :</label>
+        </div>
+        <div class="col-xs-4">
+          <input class="form-control" type="number" min="1" id="ex2" ng-model="event.guestNumber" disabled>
+        </div>
+      </div>
+      <!--<div class="row">
+        <div class="col-xs-4">
+          <label>Budget :</label>
+        </div>
+        <div class="col-xs-4">
+          <input class="form-control" type="number" min="1" id="ex3" disabled>
+        </div>
+        <div class="col-xs-2">
+          F cfa
+        </div>
+      </div>-->
+    </div>
+    <div class="col-xs-4">
+      <div class="row">
+        <div class="col-xs-6" style="text-align: right;">
+          <label>Lieu :</label>
+        </div>
+        <div class="col-xs-6">
+          <textarea class="form-control" name="place" ng-model="event.where" disabled></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6" style="text-align: right;">
+          <label>Organisateur (trice) :</label>
+        </div>
+        <div class="col-xs-6">
+          <input class="form-control" name="planner" ng-model="event.owner" disabled>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+        <input id="profile-image-upload" class="hidden" type="file">
+        <div style="color:#999;" >Cliquer ici pour changer la photo</div>
+        <!--Upload Image Js And Css-->
+      </div>
+    </div>
+  </div>
+  <br>
+  <!--<div class="tab-content">
     <div id="homeBar" class="row">
       <div class="col-md-5" style="margin-top: 7px;">
         <span>{{evtName}}</span>
@@ -15,81 +86,73 @@
       <div class="col-md-3">
         <button class="btn btn-large btn-primary" ng-click="saveMap()">Sauvegarder</button>
         <button class="btn btn-large btn-primary">Print</button>
-        <!--<label class="btn btn-primary">
+        &lt;!&ndash;<label class="btn btn-primary">
           Importer&hellip; <input type="file" style="display: none;">
-        </label>-->
-        <!--<input type="file" id ="importFile" />-->
+        </label>&ndash;&gt;
+        &lt;!&ndash;<input type="file" id ="importFile" />&ndash;&gt;
         <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#importModal">Importer</button>
       </div>
       <div class="col-md-1">
         <span> 14 tables <br> 30 places</span>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane" id="_guests">
-      <div style="padding-top: 10px;">
-        <div class="row">
-          <div class="form-group col-xs-2" style="border-right: 2px solid;">
-            <input class="form-control" ng-model="searchedGuest" placeholder="Rechercher"/>
-            <span class="glyphicon glyphicon-search"> </span>
-          </div>
-          <div class="form-group col-xs-2">
+      <div class="row">
+        <div class="form-group col-xs-2">
+          <input class="form-control" ng-model="searchedGuest" placeholder="Rechercher"/>
+          <i class="glyphicon glyphicon-search"></i>
+        </div>
+          <!--<div class="form-group col-xs-2">
             <button class="btn btn-large btn-primary" ng-click="addGuest()">Nouveau invité</button>
-          </div>
-        </div>
+          </div>-->
       </div>
-      <div>
-        <!--<table id="guestTable" class="table table-bordered table-sm table-striped table-hover">
-          <thead>
-            <tr>
-              <th><input class="form-check-input" type="checkbox" value="" ng-click="toggleAllGuests(!isSelectedAllGuests)"></th>
-              <th></th>
-              <th>Titre</th>
-              <th>Nom</th>
-              <th>Prénom</th>
-              <th>Table - place</th>
-              <th>Téléphone</th>
-              <th>Email</th>
-              <th>Commentaires</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="guest in guests | orderBy:['firstName','name','title','position'] | searchedGuestFilter:searchedGuest" ng-click="">
-              <td><input class="form-check-input" type="checkbox" value="guest._id" ng-model="guest.selected"></td>
-              <td><span class="glyphicon glyphicon-trash" ng-click="deleteGuest(guest)" style="cursor: pointer;"> </span></td>
-              <td>{{guest.title | labelTitleFilter:titles}}</td>
-              <td>{{guest.name}}</td>
-              <td>{{guest.firstName}}</td>
-              <td>{{guest.table}} - {{guest.seat}}</td>
-              <td>{{guest.phoneNumber}}</td>
-              <td>{{guest.email}}</td>
-              <td>{{guest.comment}}</td>
-            </tr>
-          </tbody>
-        </table>-->
-        <div class="row guestBlock" ng-repeat="guest in guests | orderBy:['firstName','name','title','position'] | searchedGuestFilter:searchedGuest" ng-click="">
+
+      <div ng-repeat="guest in guests | orderBy:['firstName','name','title','position'] | searchedGuestFilter:searchedGuest">
+        <div class="row guestBlock" ng-click="">
           <div class="col-md-1">
-            <!--<img src="../images/icon_female.png" alt="">-->
-            <i class="glyphicon glyphicon-user"></i>
+            <!--<i class="glyphicon glyphicon-user"></i>-->
+            <i class="cui-user-female"></i>
           </div>
           <div class="col-md-3">
-            {{guest.name}} {{guest.firstName}}
+            <span>{{guest.name}} {{guest.firstName}}</span>
           </div>
           <div class="col-md-2">
-            {{guest.phoneNumber}}
+            <i class="cui-screen-smartphone"></i>&nbsp;{{guest.phoneNumber}}
           </div>
           <div class="col-md-2">
-            {{guest.email}}
+            <i class="cui-envelope-closed"></i>&nbsp;{{guest.email}}
           </div>
           <div class="col-md-3">
-            {{guest.table}} - {{guest.seat}}
+            <i class="cui-location-pin"></i>&nbsp;Table {{guest.table}}, place {{guest.seat}}
           </div>
           <div class="col-md-1">
           </div>
         </div>
+
+        <!--<div class="row guestInfoBlock">
+          <div class="col-md-2">
+            &lt;!&ndash;<i class="glyphicon glyphicon-user"></i>&ndash;&gt;
+            <i class="cui-user-female"></i>
+          </div>
+          <div class="col-md-2">
+            <span>{{guest.name}} {{guest.firstName}}</span>
+          </div>
+          <div class="col-md-2">
+            <i class="cui-screen-smartphone"></i>&nbsp;{{guest.phoneNumber}}
+          </div>
+          <div class="col-md-2">
+            <i class="cui-envelope-closed"></i>&nbsp;{{guest.email}}
+          </div>
+          <div class="col-md-3">
+            <i class="cui-location-pin"></i>&nbsp;Table {{guest.table}}, place {{guest.seat}}
+          </div>
+          <div class="col-md-1">
+          </div>
+        </div>-->
       </div>
     </div>
     <div role="tabpanel" class="tab-pane active" id="_map">

@@ -9,16 +9,29 @@
  */
 angular.module('mscApp')
   .controller('HomeCtrl', function ($rootScope, $scope, FLOW_STEPS, ServiceAjax, $location, Session, $routeParams, $uibModal) {
-  	$scope.setStep(FLOW_STEPS.main);
+  	Session.setStep(FLOW_STEPS.main);
     $scope.setCurrentUser();
 
-    // var _evtId = $routeParams.evtId;
-    var _evtId = Session.eventId();
-    if(!_evtId) {
+    var evtId = Session.eventId();
+    if(!evtId) {
     	$location.path('/myspace');
-        return;
+      return;
     }
-	  $scope.evtName = Session.eventName();
+	  $scope.event = {};
+	  ServiceAjax.events().get(evtId).then(function(data) {
+      $scope.event = data.data;
+      ServiceAjax.rooms().get($scope.event.where).then(function(data) {
+        $scope.event.where = data.data.address;
+      }, function(data) {
+        console.log('Error: ' + data);
+      });
+      ServiceAjax.users().get($scope.event.owner).then(function(data) {
+        $scope.event.owner = data.data.lastName + ' ' + data.data.firstName;
+      }, function(data) {
+        console.log('Error: ' + data);
+      });
+    });
+
     $scope.isPlanView = true;
 
     $scope.titles = [
@@ -44,7 +57,7 @@ angular.module('mscApp')
 
     $scope.guests = [];
     let guestsRemoved = [];
-    ServiceAjax.guests().all(_evtId).then(function(data) {
+    ServiceAjax.guests().all(evtId).then(function(data) {
       let guests = data.data;
       guests.forEach(function(guest) {
         guest.key = guest.firstName + ' ' + guest.name;
@@ -53,7 +66,7 @@ angular.module('mscApp')
       $scope.guests = guests;
 
       let guestsMapTable = groupBy(guests, 'table');
-      ServiceAjax.tables().getByEvent(_evtId).then(function(data) {
+      ServiceAjax.tables().getByEvent(evtId).then(function(data) {
         let tables = data.data;
         let guestsOnTable = [];
         tables.forEach(function(table) {
@@ -67,7 +80,7 @@ angular.module('mscApp')
         let guests_ = angular.copy($scope.guests);
         guestsOnTable.forEach(function(guest1) {
           guests_ = guests_.filter(function(guest2) {
-            return guest2._id != guest1._id;
+            return guest2._id !== guest1._id;
           });
         });
         $scope.map.guests = guests_;
@@ -142,7 +155,9 @@ angular.module('mscApp')
             if(input.length) {
               input.val(log);
             } else {
-              if(log) alert(log);
+              if(log) {
+                this.alert(log);
+              }
             }
         });
       });
@@ -151,7 +166,7 @@ angular.module('mscApp')
       if(file) {
         var reader = new FileReader();
         reader.readAsArrayBuffer(file);
-        reader.onload = function(e) {
+        reader.onload = function() {
           var data = new Uint8Array(reader.result);
 //          var wb = XLSX.read(data, {type: 'array'});
 //
@@ -159,13 +174,33 @@ angular.module('mscApp')
 //          $('#wrapper')[0].innerHTML += htmlstr;
           $('#importModal').modal('hide');
         };
-        reader.onerror = function(e) {
+        reader.onerror = function() {
           alert('Fichier non supporté');
         };
-        reader.onabort = function(e) {
+        reader.onabort = function() {
           alert('Fichier non supporté');
         };
       }
+    };
+
+    // Disable weekend selection
+    function disabled() {
+      // var date = data.date,
+      // mode = data.mode;
+      // return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+    }
+
+    $scope.dateOptions = {
+      dateDisabled: disabled,
+      formatYear: 'yy',
+      maxDate: new Date(2025, 5, 22),
+//      minDate: new Date(),
+      startingDay: 1
+    };
+
+    $scope.popup = { opened: false };
+    $scope.open = function() {
+      $scope.popup.opened = true;
     };
 
     /* ******* guest ******** */
@@ -175,7 +210,7 @@ angular.module('mscApp')
         controller: 'newGuestPopupCtrl',
         resolve: {
           parameters: function () {
-            return {titles: $scope.titles, guestList: $scope.guests, eventId: _evtId};
+            return {titles: $scope.titles, guestList: $scope.guests, eventId: evtId};
           }
         }
       });
@@ -225,7 +260,7 @@ angular.module('mscApp')
 
 	  /* ******* table ******** */
     var locX = 364.5, locY = 223.5;
-    var tableStd = {'guests':{}, 'evtId': _evtId};
+    var tableStd = {'guests':{}, 'evtId': evtId};
     $scope.addTable = function(tableId) {
       var previousTables = angular.copy($scope.map.tables);
       tableStd.key = $scope.map.tables.length+1+'';

@@ -9,7 +9,7 @@
  */
 angular.module('mscApp')
   .controller('MyspaceCtrl', function ($scope, USER_ROLES, FLOW_STEPS, ServiceAjax, $location, $uibModal, Session) {
-    $scope.setStep(FLOW_STEPS.myspace);
+    Session.setStep(FLOW_STEPS.myspace);
     $scope.setCurrentUser();
 
     $scope.events = [];
@@ -29,26 +29,18 @@ angular.module('mscApp')
       console.log('Error: ' + data);
     });
 
-    function fillEventsWithRooms(events) {
-      events.forEach(function(event) {
-        ServiceAjax.rooms().get(event.where).then(function(data) {
-            event.where = data.data.name;
-            $scope.events.push(event);
-        }, function(data) {
-            console.log('Error: ' + data);
-        });
-      });
-    }
-
     if($scope.currentUser.role === USER_ROLES.owner) {
       ServiceAjax.events().getBy($scope.currentUser._id).then(function(data) {
-        var events = data.data;
-        fillEventsWithRooms(events);
+        $scope.events = data.data;
       });
     } else {
       ServiceAjax.events().getByOnwer($scope.currentUser._id).then(function(data) {
-        var events = data.data;
-        fillEventsWithRooms(events);
+        $scope.events = data.data;
+
+    $scope.$$postDigest(function(){
+//      console.log('postDigest', jQuery('strong').text());
+      map();
+    });
       });
     }
 
@@ -140,10 +132,9 @@ angular.module('mscApp')
 
       var map = new google.maps.Map(document.getElementById('map500'), {
         center: new google.maps.LatLng( 4.074742, 9.673119),
-        zoom: 12,
-        scrollwheel: false,
+        zoom: 10,
+        scrollwheel: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP
-
       });
 
       var infowindow = new google.maps.InfoWindow();
@@ -161,15 +152,25 @@ angular.module('mscApp')
           return function() {
             infowindow.setContent(locations[i][0]);
             infowindow.open(map, marker);
-          }
+          };
         })(marker, i));
       }
     };
-    $scope.$on('$viewContentLoaded', function(){
+    /*$scope.$on('viewContentLoaded', function(){
       if ($(".map").length) {
         map();
       }
-    });
+    });*/
+
+    /*var try_ = function() {
+      if (!$("#map500").length) {
+        window.requestAnimationFrame(try_);
+      }else {
+//        $("#element").do_some_stuff();
+        map();
+       }
+    };
+    try_();
 
     /*****************/
 

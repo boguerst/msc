@@ -12,14 +12,6 @@ angular.module('mscApp')
     $window.sessionStorage.setItem('firstName', userFirstName);
   };
   this.destroy = function () {
-    /*this.id = null;
-    this.userId = null;
-    this.userRole = null;*/
-
-    /*$window.sessionStorage.removeItem('userId');
-    $window.sessionStorage.removeItem('role');
-    $window.sessionStorage.removeItem('firstName');*/
-
     $window.sessionStorage.clear();
   };
   this.userId = function() {
@@ -42,5 +34,11 @@ angular.module('mscApp')
   };
   this.eventName = function() {
     return $window.sessionStorage.getItem('eventName');
+  };
+  this.setStep = function(step) {
+    $window.sessionStorage.setItem('step', step);
+  };
+  this.step = function() {
+    return $window.sessionStorage.getItem('step');
   };
 });
