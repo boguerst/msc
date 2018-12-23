@@ -33,17 +33,13 @@ angular.module('mscApp')
       ServiceAjax.events().getBy($scope.currentUser._id).then(function(data) {
         $scope.events = data.data;
 
-        $scope.$$postDigest(function(){
-          map();
-        });
+        displayMaps();
       });
     } else {
       ServiceAjax.events().getByOnwer($scope.currentUser._id).then(function(data) {
         $scope.events = data.data;
 
-        $scope.$$postDigest(function(){
-          map();
-        });
+        displayMaps();
       });
     }
 
@@ -110,44 +106,32 @@ angular.module('mscApp')
     };
 
     $scope.goToRoom = function(event) {
-      /*if($scope.isRoomManager) {
-          return;
-      }*/
       Session.setEventId(event._id);
       Session.setEventName(event.name);
       $location.path('/home');
     };
 
-    /*****************/
+    function displayMap(mapId) {
+      if(!mapId && document.getElementById(mapId)==null) {
+        return;
+      }
 
-    $('#myTabs a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-      $scope.$apply();
-    });
-
-    function map() {
-      var locations = [
+      let locations = [
           ['Club PAD de Bonanjo',  4.029837 , 9.687983,1],
           ['Cathédrale Saint Pierre et Paul', 4.044632, 9.692685,2],
           ['Espace Perenco(En face Palais de justice)', 4.043685, 9.687057,3],
       ];
 
-      if(document.getElementById('map500')==null) {
-        return;
-      }
-
-      var map = new google.maps.Map(document.getElementById('map500'), {
-        center: new google.maps.LatLng( 4.074742, 9.673119),
+      let map = new google.maps.Map(document.getElementById(mapId), {
+        center: new google.maps.LatLng(4.074742, 9.673119),
         zoom: 10,
         scrollwheel: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
 
-      var infowindow = new google.maps.InfoWindow();
+      let infowindow = new google.maps.InfoWindow();
 
-      var marker, i;
-
+      let marker, i;
       for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
@@ -162,22 +146,23 @@ angular.module('mscApp')
           };
         })(marker, i));
       }
-    };
-    /*$scope.$on('viewContentLoaded', function(){
-      if ($(".map").length) {
-        map();
-      }
-    });*/
+    }
 
-    /*var try_ = function() {
-      if (!$("#map500").length) {
-        window.requestAnimationFrame(try_);
-      }else {
-//        $("#element").do_some_stuff();
-        map();
-       }
-    };
-    try_();
+    function displayMaps() {
+      $scope.$$postDigest(function(){
+        document.querySelectorAll(".map").forEach(function(item) {
+          displayMap(item.id);
+        });
+      });
+    }
+
+    /*****************/
+
+    $('#myTabs a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+      $scope.$apply();
+    });
 
     /*****************/
 
@@ -224,10 +209,7 @@ angular.module('mscApp')
 
     $scope.$watch('eventState', function(new_, old_) {
       if (new_ !== old_) {
-
-        $scope.$$postDigest(function(){
-          map();
-        });
+        displayMaps();
       }
     });
 });

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0518eb13-dc82-4ba8-b650-71bc2abeae34" name="Default Changelist" comment="Update Start page&#10;Add option button&#10;&#10;Update appli">
+    <list default="true" id="0518eb13-dc82-4ba8-b650-71bc2abeae34" name="Default Changelist" comment="Bug : list of events">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/controllers/myspace.js" afterPath="$PROJECT_DIR$/app/scripts/controllers/myspace.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/home.css" afterPath="$PROJECT_DIR$/app/styles/home.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home.html" afterPath="$PROJECT_DIR$/app/views/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/myspace.html" afterPath="$PROJECT_DIR$/app/views/myspace.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -123,8 +120,8 @@
       <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/controllers/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="350" column="6" lean-forward="true" selection-start-line="350" selection-start-column="6" selection-end-line="358" selection-end-column="7" />
+            <state relative-caret-position="-3738">
+              <caret line="94" column="26" lean-forward="false" selection-start-line="94" selection-start-column="26" selection-end-line="94" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -143,8 +140,8 @@
       <file leaf-file-name="myspace.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/myspace.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+            <state relative-caret-position="569">
+              <caret line="60" column="26" lean-forward="false" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="26" />
               <folding>
                 <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -156,11 +153,11 @@
       <file leaf-file-name="myspace.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/controllers/myspace.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="137" column="7" lean-forward="true" selection-start-line="137" selection-start-column="7" selection-end-line="137" selection-end-column="7" />
+            <state relative-caret-position="861">
+              <caret line="211" column="8" lean-forward="false" selection-start-line="211" selection-start-column="8" selection-end-line="211" selection-end-column="8" />
               <folding>
-                <element signature="e#0#6230#0" expanded="false" />
-                <element signature="e#0#6230#0" expanded="false" />
+                <element signature="e#0#5915#0" expanded="false" />
+                <element signature="e#0#5915#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -170,8 +167,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_evtId</find>
-      <find>open</find>
       <find>myFlexDiv</find>
       <find>h4</find>
       <find>ng-show=&quot;step===flowSteps.login&quot;</find>
@@ -195,11 +190,13 @@
       <find>initMap</find>
       <find>angular-touch</find>
       <find>&quot;</find>
-      <find>map</find>
       <find>coreir</find>
       <find>coreui</find>
       <find>core</find>
       <find>events</find>
+      <find>map</find>
+      <find>map(</find>
+      <find>displayMap</find>
     </findStrings>
     <replaceStrings>
       <replace>²²</replace>
@@ -209,6 +206,7 @@
       <replace>evtId</replace>
       <replace>ServiceAjax</replace>
       <replace>'</replace>
+      <replace>displayMap(</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\ytchendjou\Documents\msc_project\msc\app\scripts</dir>
@@ -585,7 +583,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545380242052</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Bug : list of events">
+      <created>1545557387694</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1545557387694</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -691,7 +696,8 @@
     <MESSAGE value="How it works&#10;Contact us&#10;our services" />
     <MESSAGE value="Change the displaying on the events screen" />
     <MESSAGE value="Update Start page&#10;Add option button&#10;&#10;Update appli" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Start page&#10;Add option button&#10;&#10;Update appli" />
+    <MESSAGE value="Bug : list of events" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug : list of events" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1020,14 +1026,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/home.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="309">
@@ -1044,10 +1042,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/myspace.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        <state relative-caret-position="569">
+          <caret line="60" column="26" lean-forward="false" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="26" />
           <folding>
             <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1057,19 +1063,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/controllers/home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="350" column="6" lean-forward="true" selection-start-line="350" selection-start-column="6" selection-end-line="358" selection-end-column="7" />
+        <state relative-caret-position="-3738">
+          <caret line="94" column="26" lean-forward="false" selection-start-line="94" selection-start-column="26" selection-end-line="94" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/controllers/myspace.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="137" column="7" lean-forward="true" selection-start-line="137" selection-start-column="7" selection-end-line="137" selection-end-column="7" />
+        <state relative-caret-position="861">
+          <caret line="211" column="8" lean-forward="false" selection-start-line="211" selection-start-column="8" selection-end-line="211" selection-end-column="8" />
           <folding>
-            <element signature="e#0#6230#0" expanded="false" />
-            <element signature="e#0#6230#0" expanded="false" />
+            <element signature="e#0#5915#0" expanded="false" />
+            <element signature="e#0#5915#0" expanded="false" />
           </folding>
         </state>
       </provider>
