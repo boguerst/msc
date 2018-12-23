@@ -32,15 +32,18 @@ angular.module('mscApp')
     if($scope.currentUser.role === USER_ROLES.owner) {
       ServiceAjax.events().getBy($scope.currentUser._id).then(function(data) {
         $scope.events = data.data;
+
+        $scope.$$postDigest(function(){
+          map();
+        });
       });
     } else {
       ServiceAjax.events().getByOnwer($scope.currentUser._id).then(function(data) {
         $scope.events = data.data;
 
-    $scope.$$postDigest(function(){
-//      console.log('postDigest', jQuery('strong').text());
-      map();
-    });
+        $scope.$$postDigest(function(){
+          map();
+        });
       });
     }
 
@@ -130,6 +133,10 @@ angular.module('mscApp')
           ['Espace Perenco(En face Palais de justice)', 4.043685, 9.687057,3],
       ];
 
+      if(document.getElementById('map500')==null) {
+        return;
+      }
+
       var map = new google.maps.Map(document.getElementById('map500'), {
         center: new google.maps.LatLng( 4.074742, 9.673119),
         zoom: 10,
@@ -212,4 +219,15 @@ angular.module('mscApp')
         console.log('Sending done');
       });
     };
+
+    /* ******* watches ******** */
+
+    $scope.$watch('eventState', function(new_, old_) {
+      if (new_ !== old_) {
+
+        $scope.$$postDigest(function(){
+          map();
+        });
+      }
+    });
 });

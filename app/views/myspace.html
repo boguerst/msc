@@ -23,15 +23,15 @@
         <li class="active">
           <a href="#events" ng-click="eventState=EVENTSTATES.ALL" data-toggle="tab">Tous</a>
         </li>
-          <li>
-            <a href="#events" ng-click="eventState=EVENTSTATES.INPROGRESS" data-toggle="tab">En cours</a>
-          </li>
-          <li>
-            <a href="#events" ng-click="eventState=EVENTSTATES.DONE" data-toggle="tab">Terminés</a>
-          </li>
-          <li ng-show="isRoomManager">
-            <a href="#eventCreation" data-toggle="tab">Créer un événement</a>
-          </li>
+        <li>
+          <a href="#events" ng-click="eventState=EVENTSTATES.INPROGRESS" data-toggle="tab">En cours</a>
+        </li>
+        <li>
+          <a href="#events" ng-click="eventState=EVENTSTATES.DONE" data-toggle="tab">Terminés</a>
+        </li>
+        <li ng-show="isRoomManager">
+          <a href="#eventCreation" data-toggle="tab">Créer un événement</a>
+        </li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">

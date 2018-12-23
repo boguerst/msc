@@ -14,21 +14,23 @@
               <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </div>-->
-          <input class="form-control" ng-model="event.startDate | date : 'dd/MM/yyyy'" disabled>
-        </div>
+          <!--<input class="form-control" ng-model="event.startDate | date : 'dd/MM/yyyy'" disabled>-->
+          {{event.startDate | date : "dd/MM/yyyy hh:mm"}}
+        </div><!--
         <div class="col-xs-2">
           <input class="form-control" ng-model="event.startDate | date : 'hh'" disabled>
         </div>
         <div class="col-xs-2">
           <input class="form-control" ng-model="event.startDate | date : 'mm'" disabled>
-        </div>
+        </div>-->
       </div>
       <div class="row">
         <div class="col-xs-4">
-          <label for="ex2">Nombre d'invités :</label>
+          <label>Nombre d'invités :</label>
         </div>
         <div class="col-xs-4">
-          <input class="form-control" type="number" min="1" id="ex2" ng-model="event.guestNumber" disabled>
+          <!--<input class="form-control" type="number" min="1" id="ex2" ng-model="event.guestNumber" disabled>-->
+          {{event.guestNumber}}
         </div>
       </div>
       <!--<div class="row">
@@ -49,7 +51,8 @@
           <label>Lieu :</label>
         </div>
         <div class="col-xs-6">
-          <textarea class="form-control" name="place" ng-model="event.where" disabled></textarea>
+          <!--<textarea class="form-control" name="place" ng-model="event.where" disabled></textarea>-->
+          {{event.where}}
         </div>
       </div>
       <div class="row">
@@ -57,7 +60,8 @@
           <label>Organisateur (trice) :</label>
         </div>
         <div class="col-xs-6">
-          <input class="form-control" name="planner" ng-model="event.owner" disabled>
+          <!--<input class="form-control" name="planner" ng-model="event.owner" disabled>-->
+          {{event.owner}}
         </div>
       </div>
     </div>
