@@ -74,7 +74,33 @@
 	cursor: pointer;
 }
 
+#home .guestInfoBlock {
+  border: 1px solid #e6e6e6;
+  padding: 5px;
+  margin-bottom: 8px;
+  margin-right: -10px;
+  margin-left: 10px;
+  box-shadow: 8px 8px 12px #aaa;
+}
+
+#home .guestInfoBlock img {
+  width: 100%;
+}
+
+#home .form-group {
+  margin-bottom: 10px;
+}
+
 #home .form-group input,textarea {
-  margin-bottom: 7px;
+  margin-bottom: 3px;
   text-align: center;
+}
+
+#home .form-group label {
+  margin-bottom: 0px;
+  padding-top: 8px;
+}
+
+#home .nav-tabs > li.active > a {
+  color: #cf6515;
 }

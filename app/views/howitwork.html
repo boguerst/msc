@@ -1,52 +1,317 @@
-<div id="howitwork" class="menuTab">
+<div id="howitwork" class="">
   <!--<h2><span>Présentez</span> votre salle sous son meilleur jour</h2>-->
-	<div>
-    <a ng-href="#!/ourServices"><h2><span>> Consulter</span> nos offres</h2></a>
-		<div class="row">
-      <div class="col-md-3">
-        <div class="thumbnail">
-          <div>
-            <a ng-href="#!/ourServices"><img src="../images/ourServices1.png" alt="Our services"></a>
-            <div class="caption">
-              <p>Parce que vous souhaitez un accompagnement professionnel</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="thumbnail">
-          <div>
-            <a ng-href="#!/ourServices"><img src="../images/ourServices2.png" alt="Our services"></a>
-            <div class="caption">
-              <p>Parce que vos invités sont le plus important</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="thumbnail">
-          <div>
-            <a ng-href="#!/ourServices"><img src="../images/ourServices3.png" alt="Our services"></a>
-            <div class="caption">
-              <p>Parce que votre temps est précieux</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="thumbnail">
-          <div>
-            <a ng-href="#!/ourServices"><img src="../images/ourServices4.png" alt="Our services"></a>
-            <div class="caption">
-              <p>Parce que votre notoriété est essentielle</p>
-            </div>
-          </div>
-        </div>
-      </div>
-		</div>
-	</div>
 
-  <div>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="../images/accueil.png" alt="">
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <div class="row" style="text-align: center; margin: auto;">
+      <div class="col-md-4"><div class="icon icon_evt"></div>10 000 Evènements</div>
+      <div class="col-md-4"><div class="icon icon_room"></div>187 salles</div>
+      <div class="col-md-4"><div class="icon icon_country"></div>5 pays</div>
+    </div>
+  </div>
+
+	<div class="basic" style="background-color: #ecf4f1; color: #3d3d3d;">
+    <div class="container">
+      <h1 class="title title_level_1 basic__title without-text">Consultez nos offres</h1>
+      <div class="basic__list">
+        <div class="basic__item">
+          <div class="basic__image-wrap" style="height: 110px;">
+            <img src="../images/ourServices1.png"
+                 class="mobile-small" alt="24-7 support is available to ensure your event planning success" scale="0"
+                 style="position: absolute; left: 0px; right: 0px; bottom: 0px; margin: 0px auto;">
+          </div>
+          <div class="basic__item-title">24/7 Customer Service</div>
+          <div class="basic__text">
+            <p>Parce que vous souhaitez un accompagnement professionnel.</p>
+          </div>
+        </div>
+        <div class="basic__item">
+          <div class="basic__image-wrap" style="height: 110px;">
+            <img src="../images/ourServices2.png" class="mobile-small"
+                 alt="AllSeated constantly launches new features to make event planning easier" scale="0"
+                 style="position: absolute; left: 0px; right: 0px; bottom: 0px; margin: 0px auto;">
+          </div>
+          <div class="basic__item-title">Continued Innovation</div>
+          <div class="basic__text">
+            <p>Parce que vos invités sont le plus important.</p>
+          </div>
+        </div>
+        <div class="basic__item">
+          <div class="basic__image-wrap" style="height: 110px;">
+            <img src="../images/ourServices3.png" class="mobile-small" alt="AllSeated is safe and secure"
+                 scale="0" style="position: absolute; left: 0px; right: 0px; bottom: 0px; margin: 0px auto;">
+          </div>
+          <div class="basic__item-title">Secured &amp; Protected</div>
+          <p>Parce que votre temps est précieux.</p>
+        </div>
+        <div class="basic__item">
+          <div class="basic__image-wrap" style="height: 110px;">
+            <img src="../images/ourServices4.png" class="mobile-small" alt="AllSeated is safe and secure"
+                 scale="0" style="position: absolute; left: 0px; right: 0px; bottom: 0px; margin: 0px auto;">
+          </div>
+          <div class="basic__item-title">Secured &amp; Protected</div>
+          <p>Parce que votre notoriété est essentielle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="basic big_variant_2" style="background-color: #fff; color: #3d3d3d;">
+    <div class="container">
+      <h1 class="title title_level_1 basic__title without-text">Nos offres et services</h1>
+      <div class="big__side">
+        <div class="big__imac-wrap">
+          <img width="500" height="400" src="../images/appli.png"
+               class="feature-big__image wp-post-image" alt="Event planning collaboration made easy"
+               srcset="../images/appli.png 457w, ../images/appli.png 249w"
+               sizes="(max-width: 457px) 100vw, 457px">
+        </div>
+      </div>
+      <div class="big__side big__side_right">
+        <h1 class="title title_level_2 big__title big__title_top_big">Site web / Application</h1>
+        <div class="big__desc">
+          Le site web et l'application smartphone <span>Eventys</span> permettent à vos clients de gérer la liste des invités
+          et l'organisation de la salle d'évènement à tout instant et en mobilité.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="basic big_variant_2" style="background-color: #fff; color: #3d3d3d;">
+    <div class="container">
+      <div class="big__side big__side_right">
+        <div class="big__imac-wrap">
+          <img width="500" height="400" src="../images/tablettes.png"
+               class="feature-big__image wp-post-image" alt="Event planning collaboration made easy"
+               srcset="../images/tablettes.png 457w, ../images/tablettes.png 249w"
+               sizes="(max-width: 457px) 100vw, 457px">
+        </div>
+      </div>
+      <div class="big__side">
+        <h1 class="title title_level_2 big__title big__title_top_big">Tablettes</h1>
+        <div class="big__desc">
+          Les tablettes affichent visuellement l'organisation de la salle et permettent pas une simple recherche sur le nom
+          de trouver sa table. La tablette est à disposition du personnel d'accueil.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="basic big_variant_2" style="background-color: #fff; color: #3d3d3d;">
+    <div class="container">
+      <div class="big__side">
+        <div class="big__imac-wrap">
+          <img width="500" height="400" src="../images/ecransTactiles.png"
+               class="feature-big__image wp-post-image" alt="Event planning collaboration made easy"
+               srcset="../images/ecransTactiles.png 457w, ../images/ecransTactiles.png 249w"
+               sizes="(max-width: 457px) 100vw, 457px">
+        </div>
+      </div>
+      <div class="big__side big__side_right">
+        <h1 class="title title_level_2 big__title big__title_top_big">Écrans tactiles interactifs</h1>
+        <div class="big__desc">
+          Les grands écrans de 42" affichent visuellement l'organistion de la salle et permettent par une simple
+          recherche de nom de trouver la table et l'invité.<br>
+          Il s'agit de la solution privilégiée pour ceux qui ne souhaitent pas avoir de service d'accueil.
+        </div>
+      </div>
+    </div>
+    <div class="basic big_variant_2" style="background-color: #fff; color: #3d3d3d;">
+      <div class="container">
+        <div class="big__side big__side_right">
+          <div class="big__imac-wrap">
+            <img width="500" height="400" src="../images/serviceAccueil.png"
+                 class="feature-big__image wp-post-image" alt="Event planning collaboration made easy"
+                 srcset="../images/serviceAccueil.png 457w, ../images/serviceAccueil.png 249w"
+                 sizes="(max-width: 457px) 100vw, 457px">
+          </div>
+        </div>
+        <div class="big__side">
+          <h1 class="title title_level_2 big__title big__title_top_big">Service d'accueil</h1>
+          <div class="big__desc">
+            Les grands écrans de 42" affichent visuellement l'organistion de la salle et permettent par une simple
+            recherche de nom de trouver la table et l'invité.<br>
+            Il s'agit de la solution privilégiée pour ceux qui ne souhaitent pas avoir de service d'accueil.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="basic big_variant_2" style="background-color: #fff; color: #3d3d3d;">
+      <div class="container">
+        <div class="big__side">
+          <div class="big__imac-wrap">
+            <img width="500" height="400" src="../images/digilampes.png"
+                 class="feature-big__image wp-post-image" alt="Event planning collaboration made easy"
+                 srcset="../images/digilampes.png 457w, ../images/digilampes.png 249w"
+                 sizes="(max-width: 457px) 100vw, 457px">
+          </div>
+        </div>
+        <div class="big__side big__side_right">
+          <h1 class="title title_level_2 big__title big__title_top_big">Digilampes</h1>
+          <div class="big__desc">
+            Ces lampes connectées sont de différentes formes (Vases, lampes, objet de déco etc..) permettent aux invités
+            d’identifier facilement leur table lors de grande cérémonie de plusieurs centaines d’invités.<br>
+            Ils s’activent à la suite de la recherche de nom sur le totem ou la tablette.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="basic" style="background-color: #fff; color: #3d3d3d;">
+    <div class="container">
+      <h1 class="title title_level_2 basic__title without-text">Nos offres et services</h1>
+      <div class="row">
+        <div class="col-md-3">
+          <img src="../images/appli.png" alt="">
+        </div>
+        <div class="col-md-9">
+          <h3>Site web / Application</h3>
+          <p>
+            Le site web et l'application smartphone <span>Eventys</span> permettent à vos clients de gérer la liste des invités
+            et l'organisation de la salle d'évènement à tout instant et en mobilité.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <h3>Tablettes</h3>
+          <p>
+            Les tablettes affichent visuellement l'organisation de la salle et permettent pas une simple recherche sur le nom
+            de trouver sa table. La tablette est à disposition du personnel d'accueil.
+          </p>
+        </div>
+        <div class="col-md-3">
+          <img src="../images/tablettes.png" alt="">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <img src="../images/ecransTactiles.png" alt="">
+        </div>
+        <div class="col-md-9">
+          <h3>Écrans tactiles interactifs</h3>
+          <p>
+            Les grands écrans de 42" affichent visuellement l'organistion de la salle et permettent par une simple
+            recherche de nom de trouver la table et l'invité.<br>
+            Il s'agit de la solution privilégiée pour ceux qui ne souhaitent pas avoir de service d'accueil.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <h3>Service d'accueil</h3>
+          <p>
+            Faciliter l'installation de vos invités. Être à leur écoute et aux petits soins pour eux.<br>
+            <span>Eventys</span> met à votre disposition un servuce d'accueil sur mesure pour vos évènements.
+          </p>
+        </div>
+        <div class="col-md-3">
+          <img src="../images/serviceAccueil.png" alt="">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <img src="../images/digilampes.png" alt="">
+        </div>
+        <div class="col-md-9">
+          <h3>Digilampes</h3>
+          <p>
+            Ces lampes connectées sont de différentes formes (Vases, lampes, objet de déco etc..) permettent aux invités
+            d’identifier facilement leur table lors de grande cérémonie de plusieurs centaines d’invités.<br>
+            Ils s’activent à la suite de la recherche de nom sur le totem ou la tablette.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+  <div class="basic" style="background-color: #ecf4f1; color: #3d3d3d;">
+    <div>
+      <div class="container">
+        <h1 class="title title_level_1 basic__title without-text">Planifiez votre évènement dès aujourd'hui</h1>
+      </div>
+    </div>
+    <div class="basic big_variant_3">
+      <div class="container">
+        <div class="big__side_2">
+          <div class="big__imac-wrap">
+            <img width="170" height="120" src="../images/appli.png"
+                 class="feature-big__image wp-post-image" alt="Event planning collaboration made easy"
+                 srcset="../images/appli.png 457w, ../images/appli.png 249w"
+                 sizes="(max-width: 457px) 100vw, 457px">
+          </div>
+        </div>
+        <div class="big__side big__side_right">
+          <h1 class="title title_level_2 big__title">1. Créez votre évènement</h1>
+          <div class="big__desc">
+            Planifiez la date et le lieu de votre évènement facilement depuis notre site.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="basic big_variant_3">
+      <div class="container">
+        <div class="big__side_2">
+          <div class="big__imac-wrap">
+            <img width="170" height="120" src="../images/howItWorks2.png"
+                 class="feature-big__image wp-post-image" alt="Event planning collaboration made easy"
+                 srcset="../images/howItWorks2.png 457w, ../images/howItWorks2.png 249w"
+                 sizes="(max-width: 457px) 100vw, 457px">
+          </div>
+        </div>
+        <div class="big__side big__side_right">
+          <h1 class="title title_level_2 big__title">2. Organisez votre évènement</h1>
+          <div class="big__desc">
+            Depuis votre espace privé, gérez votre liste d'invités et votre plan de table.
+            Envoyez des messages groupés avec les dernières actualités.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="basic big_variant_3">
+      <div class="container">
+        <div class="big__side_2">
+          <div class="big__imac-wrap">
+            <img width="170" height="120" src="../images/howItWorks3.png"
+                 class="feature-big__image wp-post-image" alt="Event planning collaboration made easy"
+                 srcset="../images/howItWorks3.png 457w, ../images/howItWorks3.png 249w"
+                 sizes="(max-width: 457px) 100vw, 457px">
+          </div>
+        </div>
+        <div class="big__side big__side_right">
+          <h1 class="title title_level_2 big__title">3. Profitez. Accueillez vos invités</h1>
+          <div class="big__desc">
+            Grace à notre technologie des lampes connectées, et à notre service d'accueil,
+            vos invités sont pris en charge dès leur arrivée. Vous n'avez plus qu'à profiter de votre soirée.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<div>
     <h2><span>> Planifiez</span> votre évènement dès aujourd'hui</h2>
     <div class="row">
       <div class="col-md-2">
@@ -83,5 +348,5 @@
         </p>
       </div>
     </div>
-  </div>
+  </div>-->
 </div>

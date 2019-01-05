@@ -18,6 +18,9 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <!--<link rel="stylesheet" href="node_modules/@coreui/icons/css/coreui-icons.min.css" />-->
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons/css/coreui-icons.min.css">
+
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/howitwork.css">
     <link rel="stylesheet" href="styles/ourservices.css">
@@ -46,11 +49,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="" style="color: #cf6515;">EVENTYS</a>
+            <a class="navbar-brand" href="#!/howItWork" style="color: #cf6515;">EVENTYS</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li ng-show="getStep()===flowSteps.login"><a href="#!/login">CONNEXION</a></li>
+              <li ng-show="getStep()===flowSteps.login"><a href="#!/login" style="color: #cf6515;">CONNEXION</a></li>
               <!--<li ng-show="step===flowSteps.login"><a href="#!/subscribe">CRÉER UN COMPTE</a></li>-->
               <li id="userName" ng-show="getStep()!==flowSteps.login"><a>{{currentUser.firstName}}</a></li>
               <li id="userMenu" ng-show="getStep()!==flowSteps.login" class="dropdown">
@@ -65,7 +68,7 @@
                   <li><a ng-href="#!/myBills">Mes factures</a></li>
                   <li><a ng-href="#!/settings">Paramètres</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#" ng-click="logout()">Déconnexion</a></li>
+                  <li><a href="#" style="color: #cf6515;" ng-click="logout()">Déconnexion</a></li>
                   <!--
                   <li class="dropdown-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
@@ -74,8 +77,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right" role="tablist">
-              <li><a ng-href="#!/ourServices">Nos offres et services</a></li>
-              <li><a ng-href="#!/howItWork">Comment ça marche?</a></li>
+              <li><a ng-href="#!/howItWork">HOME</a></li>
               <li><a ng-href="#!/aboutUs">À propos de nous</a></li>
               <li><a ng-href="#!/contactUs">Nous contacter</a></li>
               <li><a>&nbsp;</a></li>
@@ -92,55 +94,19 @@
                 </ul>
               </li>-->
 
-              <li id="guestsTab" ng-show="step===flowSteps.main">
+              <!--<li id="guestsTab" ng-show="step===flowSteps.main">
                 <a href="#_guests">Invités</a>
               </li>
               <li id="mapTab" ng-show="step===flowSteps.main">
                 <a href="#_map">Carte</a>
-              </li>
+              </li>-->
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </nav>
-
-      <div ng-show="getStep()===flowSteps.login">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-          </ol>
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-              <img src="./images/accueil.png" alt="">
-            </div>
-
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="row" style="text-align: center; margin: auto;">
-          <div class="col-md-4"><div class="icon icon_evt"></div>10 000 Evènements</div>
-          <div class="col-md-4"><div class="icon icon_room"></div>187 salles</div>
-          <div class="col-md-4"><div class="icon icon_country"></div>5 pays</div>
-        </div>
-      </div>
     </div>
 
-    <div class="container">
     <div ng-view=""></div>
-    </div>
 
     <div login-dialog ng-if="step!==flowSteps.login"></div>
 
@@ -206,8 +172,8 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>

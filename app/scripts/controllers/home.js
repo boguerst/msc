@@ -12,7 +12,7 @@ angular.module('mscApp')
   	Session.setStep(FLOW_STEPS.main);
     $scope.setCurrentUser();
 
-    var evtId = Session.eventId();
+    let evtId = Session.eventId();
     if(!evtId) {
     	$location.path('/myspace');
       return;
@@ -136,7 +136,7 @@ angular.module('mscApp')
     setMap();
 
     /* ******* methods ******** */
-    var file;
+    let file;
     $(function() {
       // We can attach the `fileselect` event to all file inputs on the page
       $(document).on('change', ':file', function() {
@@ -150,8 +150,8 @@ angular.module('mscApp')
       // We can watch for our custom `fileselect` event like this
       $(document).ready( function() {
         $(':file').on('fileselect', function(event, numFiles, label) {
-            var input = $(this).parents('.input-group').find(':text');
-            var log = numFiles > 1 ? numFiles + ' files selected' : label;
+            let input = $(this).parents('.input-group').find(':text');
+            let log = numFiles > 1 ? numFiles + ' files selected' : label;
             if(input.length) {
               input.val(log);
             } else {
@@ -164,10 +164,10 @@ angular.module('mscApp')
     });
     $scope.import = function() {
       if(file) {
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.readAsArrayBuffer(file);
         reader.onload = function() {
-          var data = new Uint8Array(reader.result);
+//          let data = new Uint8Array(reader.result);
 //          var wb = XLSX.read(data, {type: 'array'});
 //
 //          var htmlstr = XLSX.write(wb, {sheet: 'sheet', type:'binary', bookType: 'html'});
@@ -175,10 +175,10 @@ angular.module('mscApp')
           $('#importModal').modal('hide');
         };
         reader.onerror = function() {
-          alert('Fichier non supporté');
+          this.alert('Fichier non supporté');
         };
         reader.onabort = function() {
-          alert('Fichier non supporté');
+          this.alert('Fichier non supporté');
         };
       }
     };
@@ -205,7 +205,7 @@ angular.module('mscApp')
 
     /* ******* guest ******** */
     $scope.addGuest = function() {
-	    var modalInstance = $uibModal.open({
+	    let modalInstance = $uibModal.open({
         templateUrl: '../../views/newGuestPopup.html',
         controller: 'newGuestPopupCtrl',
         resolve: {
@@ -259,10 +259,10 @@ angular.module('mscApp')
     };
 
 	  /* ******* table ******** */
-    var locX = 364.5, locY = 223.5;
-    var tableStd = {'guests':{}, 'evtId': evtId};
+    let locX = 364.5, locY = 223.5;
+    let tableStd = {'guests':{}, 'evtId': evtId};
     $scope.addTable = function(tableId) {
-      var previousTables = angular.copy($scope.map.tables);
+      let previousTables = angular.copy($scope.map.tables);
       tableStd.key = $scope.map.tables.length+1+'';
       tableStd.category = 'Table'+tableId;
       tableStd.name = tableStd.key + '';
@@ -313,10 +313,10 @@ angular.module('mscApp')
       });
     };
 
-    var triggerTime = 0;
+    let triggerTime = 0;
     $scope.triggerPosition = function() {
-    	var model = $scope.model;
-    	var data = model.findNodeDataForKey($scope.guests[0].key);
+    	let model = $scope.model;
+    	let data = model.findNodeDataForKey($scope.guests[0].key);
     	if(!data) {
     		model = $scope.guestList;
         data = model.findNodeDataForKey($scope.guests[0].key);
@@ -335,6 +335,13 @@ angular.module('mscApp')
     	setTimeout(function(){ model.setDataProperty(data, 'fill', 'blanchedalmond'); }, 200);
     	setTimeout($scope.triggerPosition, 200);
     };
+
+    $('#myHomeTabs a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+//      $scope.isPlanView = $('.nav-tabs .active').text() === "Orga Salle";
+      $scope.$apply();
+    });
 
     /* ******* screen ******** */
     $scope.isFullScreen = false;

@@ -1,7 +1,7 @@
 <div id="home">
   <h2><span>></span> {{event.name}}</h2>
   <br>
-  <div class="row form-group">
+  <div class="row">
     <div class="col-xs-5">
       <div class="row">
         <div class="col-xs-4">
@@ -66,10 +66,10 @@
       </div>
     </div>
     <div class="col-xs-3">
-      <div align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+      <div align="center">
+        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
         <input id="profile-image-upload" class="hidden" type="file">
         <div style="color:#999;" >Cliquer ici pour changer la photo</div>
-        <!--Upload Image Js And Css-->
       </div>
     </div>
   </div>
@@ -103,10 +103,15 @@
   </div>-->
 
   <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane" id="_guests">
+  <ul class="nav nav-tabs" role="tablist" id="myHomeTabs">
+    <li role="presentation"><a href="#guestsTab">Liste des Invités</a></li>
+    <li role="presentation" class="active"><a href="#mapTab">Plan de table</a></li>
+  </ul>
+
+  <div class="tab-content" style="padding-top: 10px; padding-bottom: 10px;">
+    <div role="tabpanel" class="tab-pane" id="guestsTab">
       <div class="row">
-        <div class="form-group col-xs-2">
+        <div class="form-group col-md-2 col-sm-3">
           <input class="form-control" ng-model="searchedGuest" placeholder="Rechercher"/>
           <i class="glyphicon glyphicon-search"></i>
         </div>
@@ -117,50 +122,126 @@
 
       <div ng-repeat="guest in guests | orderBy:['firstName','name','title','position'] | searchedGuestFilter:searchedGuest">
         <div class="row guestBlock" ng-click="">
-          <div class="col-md-1">
-            <!--<i class="glyphicon glyphicon-user"></i>-->
+          <div class="col col-md-2 col-sm-1">
             <i class="cui-user-female"></i>
           </div>
-          <div class="col-md-3">
+          <div class="col col-md-3 col-sm-3">
             <span>{{guest.name}} {{guest.firstName}}</span>
           </div>
-          <div class="col-md-2">
+          <div class="col col-md-2 col-sm-3">
             <i class="cui-screen-smartphone"></i>&nbsp;{{guest.phoneNumber}}
           </div>
-          <div class="col-md-2">
+          <div class="col col-md-2 col-sm-2">
             <i class="cui-envelope-closed"></i>&nbsp;{{guest.email}}
           </div>
-          <div class="col-md-3">
+          <div class="col col-md-3 col-sm-3">
             <i class="cui-location-pin"></i>&nbsp;Table {{guest.table}}, place {{guest.seat}}
-          </div>
-          <div class="col-md-1">
           </div>
         </div>
 
-        <!--<div class="row guestInfoBlock">
-          <div class="col-md-2">
-            &lt;!&ndash;<i class="glyphicon glyphicon-user"></i>&ndash;&gt;
-            <i class="cui-user-female"></i>
+        <div class="row guestInfoBlock">
+          <div class="col-md-2" ng-click="goToRoom(event)">
+            <img src="../images/appli.png" alt="">
           </div>
-          <div class="col-md-2">
-            <span>{{guest.name}} {{guest.firstName}}</span>
+          <div class="form-group col-md-10">
+            <div class="row">
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Nom :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="lastName" placeholder="Nom" required></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                &nbsp;
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Téléphone :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="phoneNunmber" placeholder="Téléphone" required></div>
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Prénom :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="firstName" placeholder="Prénom" required></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                &nbsp;
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Email :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="email" placeholder="Email" required></div>
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Sexe :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="sexe" placeholder="Sexe" required></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                &nbsp;
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Table :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="position" placeholder="Numéro de table" required></div>
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                <i class="glyphicon glyphicon-ok" style="color: #337ab7;"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Date de naissance :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="birthday" placeholder="Date de naissance" required></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                &nbsp;
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Accompagné(e) de :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="friend" placeholder="Avec" required></div>
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                <i class="glyphicon glyphicon-trash"></i>
+              </div>
+            </div>
           </div>
-          <div class="col-md-2">
-            <i class="cui-screen-smartphone"></i>&nbsp;{{guest.phoneNumber}}
-          </div>
-          <div class="col-md-2">
-            <i class="cui-envelope-closed"></i>&nbsp;{{guest.email}}
-          </div>
-          <div class="col-md-3">
-            <i class="cui-location-pin"></i>&nbsp;Table {{guest.table}}, place {{guest.seat}}
-          </div>
-          <div class="col-md-1">
-          </div>
-        </div>-->
+        </div>
       </div>
     </div>
-    <div role="tabpanel" class="tab-pane active" id="_map">
-      <div class="dropdown" style="padding-top: 10px; padding-bottom: 10px;">
+    <div role="tabpanel" class="tab-pane active" id="mapTab">
+      <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Ajouter une table
         <span class="caret"></span></button>
         <ul class="dropdown-menu">

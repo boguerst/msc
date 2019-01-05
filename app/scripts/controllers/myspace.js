@@ -29,6 +29,51 @@ angular.module('mscApp')
       console.log('Error: ' + data);
     });
 
+    function displayMap(mapId) {
+      if(!mapId && document.getElementById(mapId)===null) {
+        return;
+      }
+
+      let locations = [
+          ['Club PAD de Bonanjo',  4.029837 , 9.687983,1],
+          ['Cathédrale Saint Pierre et Paul', 4.044632, 9.692685,2],
+          ['Espace Perenco(En face Palais de justice)', 4.043685, 9.687057,3],
+      ];
+
+      let map = new google.maps.Map(document.getElementById(mapId), {
+        center: new google.maps.LatLng(4.074742, 9.673119),
+        zoom: 10,
+        scrollwheel: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      let infowindow = new google.maps.InfoWindow();
+
+      let marker, i;
+      for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+          map: map,
+          icon:'../../images/map-marker.png'
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infowindow.setContent(locations[i][0]);
+            infowindow.open(map, marker);
+          };
+        })(marker, i));
+      }
+    }
+
+    function displayMaps() {
+      $scope.$$postDigest(function(){
+        document.querySelectorAll(".map").forEach(function(item) {
+          displayMap(item.id);
+        });
+      });
+    }
+
     if($scope.currentUser.role === USER_ROLES.owner) {
       ServiceAjax.events().getBy($scope.currentUser._id).then(function(data) {
         $scope.events = data.data;
@@ -110,51 +155,6 @@ angular.module('mscApp')
       Session.setEventName(event.name);
       $location.path('/home');
     };
-
-    function displayMap(mapId) {
-      if(!mapId && document.getElementById(mapId)==null) {
-        return;
-      }
-
-      let locations = [
-          ['Club PAD de Bonanjo',  4.029837 , 9.687983,1],
-          ['Cathédrale Saint Pierre et Paul', 4.044632, 9.692685,2],
-          ['Espace Perenco(En face Palais de justice)', 4.043685, 9.687057,3],
-      ];
-
-      let map = new google.maps.Map(document.getElementById(mapId), {
-        center: new google.maps.LatLng(4.074742, 9.673119),
-        zoom: 10,
-        scrollwheel: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-
-      let infowindow = new google.maps.InfoWindow();
-
-      let marker, i;
-      for (i = 0; i < locations.length; i++) {
-        marker = new google.maps.Marker({
-          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-          map: map,
-          icon:'../../images/map-marker.png'
-        });
-
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-          return function() {
-            infowindow.setContent(locations[i][0]);
-            infowindow.open(map, marker);
-          };
-        })(marker, i));
-      }
-    }
-
-    function displayMaps() {
-      $scope.$$postDigest(function(){
-        document.querySelectorAll(".map").forEach(function(item) {
-          displayMap(item.id);
-        });
-      });
-    }
 
     /*****************/
 
