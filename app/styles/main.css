@@ -19,17 +19,35 @@ body {
   max-width: 300px;
 }
 .form-signin-login {
-  padding: 90px 29px 29px;
-  margin: 60px auto 0px 6px;
+  margin: 60px auto 40px 6px;
 }
-.form-signin input[type="text"],
-.form-signin input[type="email"],
-.form-signin input[type="password"] {
+.form-signin input {
   font-size: 14px;
   text-align: center;
   height: auto;
   margin-bottom: 15px;
   padding: 7px 9px;
+}
+
+.form-signin button {
+  width: 100%;
+  border-color: #cf6515;
+  background-color: #cf6515;
+}
+
+.form-signin div {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.form-signin div.radio {
+  text-align: left;
+}
+
+.form-signin a {
+  color: #cf6515;
+  cursor: pointer;
 }
 
 .css-form input.ng-invalid.ng-touched {
@@ -44,29 +62,6 @@ body {
 #myCarousel {
   top: -18px;
 }
-
-/*
-.menuTab {
-  margin-top: 50px;
-}
-
-.menuTab h2 {
-  font-size: 45px;
-  color: #000;
-  margin-bottom: 60px;
-}
-
-.menuTab h2 span {
-  color: #cf6515;
-}
-
-.menuTab h3 {
-  font-size: 35px;
-}
-
-.menuTab h3 span {
-  color: #cf6515;
-}*/
 
 /* Custom page footer */
 .footer {
