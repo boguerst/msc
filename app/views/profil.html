@@ -48,8 +48,8 @@
         <input type="email" name="email" class="form-control" placeholder="Email" ng-model="user.email" required>
         <input name="phoneNumber" class="form-control" placeholder="Numéro de téléphone" ng-model="user.phoneNumber" required>
         <input type="password" name="password" class="form-control" placeholder="Mot de passe" ng-model="user.password" required>
-        <input type="password" name="passwordCnf" class="form-control" placeholder="Confirmation mot de passe" required>
-        <a class="btn btn-large btn-primary pull-right" ng-click="isUpdate = false" style="cursor: pointer;">Annuler</a>
+        <input type="password" name="passwordCnf" class="form-control"  placeholder="Confirmation mot de passe" required>
+        <button class="btn btn-large btn-primary cancel" ng-click="isUpdate = false">Annuler</button>
         <button class="btn btn-large btn-primary" ng-disabled="subscriptionForm.$invalid" ng-click="submitModification(user)">Valider</button>
       </form>
     </div>
