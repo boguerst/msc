@@ -1,22 +1,6 @@
 
-#ourservices span {
-  color: #cf6515;
-}
-
-#ourservices img {
-  width: "150px";
-  max-width: 100%;
-  height: auto;
-}
-
-#ourservices .row {
-  margin-bottom: 50px;
-}
-
-#ourservices .row h3 {
-  color: #cf6515;
-}
-
-#ourservices .row p {
-  font-size: 22px;
-}
+.style-iv9ohef12_zoomedin {cursor:url(https://static.parastorage.com/services/skins/2.1229.80/images/wysiwyg/core/themes/base/cursor_zoom_out.png), url(https://static.parastorage.com/services/skins/2.1229.80/images/wysiwyg/core/themes/base/cursor_zoom_out.cur), auto;overflow:hidden;display:block;}
+.style-iv9ohef12_zoomedout {cursor:url(https://static.parastorage.com/services/skins/2.1229.80/images/wysiwyg/core/themes/base/cursor_zoom_in.png), url(https://static.parastorage.com/services/skins/2.1229.80/images/wysiwyg/core/themes/base/cursor_zoom_in.cur), auto;}
+.style-iv9ohef12link {display:block;  border-radius:50%;border:0px solid rgba(255, 255, 255, 1);background-color:rgba(255, 255, 255, 1);overflow:hidden;}
+.style-iv9ohef12img {border-radius:50%;overflow:hidden;}
+.style-iv9ohef12imgimage {position:static;box-shadow:#000 0 0 0;user-select:none;}
