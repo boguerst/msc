@@ -1,0 +1,39 @@
+<h2>Mes évènements</h2>
+
+<form [formGroup]="codeForm" (ngSubmit)="saveEvent()">
+	<div class="form-group row">
+		<div class="col-sm-3">
+		  <input id="code" class="form-control" formControlName="code"
+		  placeholder="Entrer le code de l'évènement">
+		</div>
+		<div class="col-sm-2">
+			<button type="submit" class="btn btn-success" [disabled]="codeForm.invalid">Ajouter</button>
+		</div>
+	</div>
+</form>
+
+<!-- <mat-tab-group mat-align-tabs="start">
+  <mat-tab label="First">Content 1</mat-tab>
+  <mat-tab label="Second">Content 2</mat-tab>
+  <mat-tab label="Third">Content 3</mat-tab>
+</mat-tab-group> -->
+
+<mat-tab-group mat-align-tabs="center" [selectedIndex]="selectedIndex" (selectedIndexChange)="changeTab($event)">
+  <mat-tab label="Tous">
+	  <app-event *ngFor="let event of evtsPromise | async | orderBy:orderList:true:true | filterBy : nameFilter" [event]="event"></app-event>
+  </mat-tab>
+  <mat-tab label="En cours">
+  	<app-event *ngFor="let event of evtsInProgressPromise | async | orderBy:orderList:true:true | filterBy : nameFilter" [event]="event"></app-event>
+  </mat-tab>
+  <mat-tab label="terminés">
+  	<app-event *ngFor="let event of evtsDonePromise | async | orderBy:orderList:true:true | filterBy : nameFilter" [event]="event"></app-event>
+  </mat-tab>
+</mat-tab-group>
+
+<!-- <mat-tab-group mat-align-tabs="end">
+  <mat-tab label="First">Content 1</mat-tab>
+  <mat-tab label="Second">Content 2</mat-tab>
+  <mat-tab label="Third">Content 3</mat-tab>
+</mat-tab-group> -->
+
+<!-- <mat-slider min="1" max="100" step="1" value="1"></mat-slider> -->

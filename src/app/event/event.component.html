@@ -1,0 +1,18 @@
+<div class="row eventBlock">
+  <div class="col-md-2" ng-click="goToRoom(event)">
+    <img src="assets/img/appli.png" alt="photo de l'évènement">
+  </div>
+  <div class="col-md-5" ng-click="">
+    <span>{{event.name}}</span><br>
+    {{event.startDate | date : "dd/MM/yyyy"}}<br>
+    {{event.guestNumber}}<br>
+    4 000 000 fcfa
+  </div>
+  <div class="col-md-2" ng-click="">
+    {{event.where}}<br>
+    Douala, Cameroun
+  </div>
+  <div class="col-md-3" style="height: 110px;">
+    <div #map class="map">Map is loading</div>
+  </div>
+</div>
