@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { User } from '../../models/user';
+// import { User } from '../../models/user';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -33,15 +33,15 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
-    const email = this.signinForm.value['email'];
-    const password = this.signinForm.value['password'];
-    this.authService.signin(email, password).then(
+    const email = this.signinForm.value.email;
+    const password = this.signinForm.value.password;
+    this.authService.SignIn(email, password).then(
       () => {
         this.router.navigate(['/mySpace']);
       },
       (error) => {
         this.errorMessage = error;
-      })
+      });
   }
 
 }

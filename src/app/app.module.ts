@@ -8,6 +8,9 @@ import { MatSliderModule } from '@angular/material/slider';
 /*import { MatButtonModule, MatCheckboxModule } from '@angular/material';*/
 import { OrderModule } from 'ngx-order-pipe';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -37,14 +40,16 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
     MatTabsModule,
-    MatSliderModule/*,
-    MatButtonModule,
-    MatCheckboxModule*/,
+    MatSliderModule,
+    /*MatButtonModule,
+    MatCheckboxModule,*/
     OrderModule,
     FilterPipeModule
   ],
