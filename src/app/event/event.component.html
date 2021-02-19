@@ -1,14 +1,14 @@
 <div class="row eventBlock">
-  <div class="col-md-2" ng-click="goToRoom(event)">
+  <div class="col-md-2" (click)="goToRoom(event)">
     <img src="assets/img/appli.png" alt="photo de l'évènement">
   </div>
-  <div class="col-md-5" ng-click="">
+  <div class="col-md-5" (click)="goToRoom(event)">
     <span>{{event.name}}</span><br>
     {{event.startDate | date : "dd/MM/yyyy"}}<br>
     {{event.guestNumber}}<br>
     4 000 000 fcfa
   </div>
-  <div class="col-md-2" ng-click="">
+  <div class="col-md-2" (click)="goToRoom(event)">
     {{event.where}}<br>
     Douala, Cameroun
   </div>

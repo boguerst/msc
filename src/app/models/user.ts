@@ -1,14 +1,8 @@
-export class User {
-  constructor(private pseudo: string, private email: string, private password: string, private uid: string) {
-    this.email = email;
-    this.password = password;
-  }
-
-  getPseudo() {
-    return this.pseudo;
-  }
-
-  getUid() {
-    return this.uid;
-  }
+export interface User {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  emailVerified: boolean;
+  profile: string; // A: Admin, O: Room's owner, C: Client
 }

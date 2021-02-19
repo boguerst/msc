@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSliderModule } from '@angular/material/slider';
@@ -20,11 +20,15 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { MyspaceComponent } from './myspace/myspace.component';
 import { EventComponent } from './event/event.component';
 import { EventFilterPipe } from './pipes/event-filter.pipe';
+import { GojsAngularModule } from 'gojs-angular';
+import { MyEventComponent } from './my-event/my-event.component';
 
 const appRoutes: Routes = [
   { path: 'signin', component: SigninComponent},
   { path: 'signup', component: SignupComponent},
+  { path: 'signout', component: SignupComponent},
   { path: 'mySpace', canActivate: [AuthGuard], component: MyspaceComponent},
+  { path: 'myEvent', canActivate: [AuthGuard], component: MyEventComponent},
   { path: '', redirectTo: 'mySpace', pathMatch: 'full' },
   { path: '**', redirectTo: 'mySpace'}
 ];
@@ -36,7 +40,8 @@ const appRoutes: Routes = [
     SignupComponent,
     MyspaceComponent,
     EventComponent,
-    EventFilterPipe
+    EventFilterPipe,
+    MyEventComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ const appRoutes: Routes = [
     /*MatButtonModule,
     MatCheckboxModule,*/
     OrderModule,
-    FilterPipeModule
+    FilterPipeModule,
+    GojsAngularModule
   ],
   providers: [],
   bootstrap: [AppComponent]

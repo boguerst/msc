@@ -9,7 +9,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li routerLinkActive="active"><a routerLink="/services">Nos offres et services</a></li>
         <li routerLinkActive="active"><a routerLink="/howItWorks">Comment ça marche</a></li>
-        <li routerLinkActive="active"><a>{{ pseudo }}Menu</a></li>
+<!--        <li routerLinkActive="active"><a>{{ pseudo }}Menu</a></li>-->
+        <li routerLinkActive="active" *ngIf="isLoggedIn()"><a (click)="signOut()">Déconnexion</a></li>
       </ul>
     </div>
   </div>

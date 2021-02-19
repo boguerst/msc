@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatTabGroup } from '@angular/material';
+// import { MatTabGroup } from '@angular/material';
 
 // import * as $ from 'jquery';
 
+import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
 
 @Component({
@@ -25,9 +26,16 @@ export class MyspaceComponent implements OnInit {
   searchTerm = '';
   nameFilter = { name: 'e' };
 
-  constructor(private formBuilder: FormBuilder) { }
+  events;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private eventService: EventService
+  ) { }
 
   ngOnInit() {
+    this.getEvents();
+
     this.initForm();
 
     this.today.setHours(0, 0, 0, 0);
@@ -36,10 +44,16 @@ export class MyspaceComponent implements OnInit {
     const lastMonth: Date = new Date();
     lastMonth.setMonth(this.today.getMonth() - 1);
     this.evts  = [
-      new Event('1', 'evt1', 'user1', 'owner1', 'where1', this.today, tomorrow, new Date()),
-      new Event('2', 'evt2', 'user2', 'owner2', 'where2', lastMonth, lastMonth, new Date())
+      {uid: '1', name: 'evt1', by: 'user1', owner: 'owner1', where: 'where1',
+        startDate: this.today, endDate: tomorrow, creationDate: new Date()},
+      {uid: '2', name: 'evt2', by: 'user2', owner: 'owner2', where: 'where2',
+        startDate: this.today, endDate: tomorrow, creationDate: new Date()}
     ];
     this.changeTab(this.selectedIndex);
+  }
+
+  getEvents() {
+    this.eventService.getEvents().subscribe(res => (this.events = res));
   }
 
   initForm() {
@@ -56,14 +70,14 @@ export class MyspaceComponent implements OnInit {
     if (status === 1) {
       this.evtsInProgressPromise = new Promise(resolve => {
         const evtsInProgress = this.evts.filter((elt: Event) => {
-          return elt.getStartDate() <= this.today && elt.getEndDate() >= this.today;
+          return elt.startDate <= this.today && elt.endDate >= this.today;
         });
         window.setTimeout(() => resolve(evtsInProgress), 1000);
       });
     } else if (status === 2) {
       this.evtsDonePromise = new Promise(resolve => {
         const evtsDone = this.evts.filter((elt: Event) => {
-          return elt.getEndDate() < this.today;
+          return elt.endDate < this.today;
         });
         window.setTimeout(() => resolve(evtsDone), 1000);
       });
@@ -74,7 +88,7 @@ export class MyspaceComponent implements OnInit {
     }
   }
 
-  statusFilter(evt) {
+  statusFilter() {
     return true;
   }
 

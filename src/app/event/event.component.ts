@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Event } from '../models/event';
 
@@ -9,7 +10,9 @@ declare var google: any;
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.css']
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnInit, AfterViewInit {
+
+  constructor(private router: Router) { }
 
   @Input() event: Event;
 
@@ -18,14 +21,13 @@ export class EventComponent implements OnInit {
   marker: Object;
   zoom: number = 10;
 
-  constructor() { }
+  @ViewChild('map', {static: true}) mapRef: ElementRef;
 
   ngOnInit() {
   }
 
-  @ViewChild('map', {static: true}) mapRef: ElementRef;
   ngAfterViewInit() {
-    //used setTimeout google map is delayed in loading, in stackBlitz
+    // used setTimeout google map is delayed in loading, in stackBlitz
 
     setTimeout(() => {
       this.map = new google.maps.Map(this.mapRef.nativeElement, {
@@ -37,9 +39,14 @@ export class EventComponent implements OnInit {
         map: this.map
       });
 
-    }, 2000)
+    }, 2000);
 
-    //console.log(this.map.getZoom())
+    // console.log(this.map.getZoom())
+  }
+
+  goToRoom(evt) {
+    localStorage.setItem('event', JSON.stringify(this.event));
+    this.router.navigate(['myEvent']);
   }
 
 }

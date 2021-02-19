@@ -3,8 +3,7 @@
 <form [formGroup]="codeForm" (ngSubmit)="saveEvent()">
 	<div class="form-group row">
 		<div class="col-sm-3">
-		  <input id="code" class="form-control" formControlName="code"
-		  placeholder="Entrer le code de l'évènement">
+		  <input id="code" class="form-control" formControlName="code" placeholder="Entrer le code de l'évènement">
 		</div>
 		<div class="col-sm-2">
 			<button type="submit" class="btn btn-success" [disabled]="codeForm.invalid">Ajouter</button>

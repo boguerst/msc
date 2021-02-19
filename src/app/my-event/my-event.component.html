@@ -1,0 +1,333 @@
+<div id="home" class="container">
+  <h2><span>></span> {{event.name}}</h2>
+  <br>
+  <div class="row">
+    <div class="col-xs-5">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Date :</label>
+        </div>
+        <div class="col-xs-4">
+          <!--<div class="input-group">
+            <input class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="event.startDate" is-open="popup.opened" datepicker-options="dateOptions" close-text="Close" />
+            <span class="input-group-btn" style="padding-bottom: 10px;">
+              <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </div>-->
+          <!--<input class="form-control" ng-model="event.startDate | date : 'dd/MM/yyyy'" disabled>-->
+          {{event.startDate | date : "dd/MM/yyyy hh:mm"}}
+        </div><!--
+        <div class="col-xs-2">
+          <input class="form-control" ng-model="event.startDate | date : 'hh'" disabled>
+        </div>
+        <div class="col-xs-2">
+          <input class="form-control" ng-model="event.startDate | date : 'mm'" disabled>
+        </div>-->
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Nombre d'invités :</label>
+        </div>
+        <div class="col-xs-4">
+          <!--<input class="form-control" type="number" min="1" id="ex2" ng-model="event.guestNumber" disabled>-->
+          {{event.guestNumber}}
+        </div>
+      </div>
+      <!--<div class="row">
+        <div class="col-xs-4">
+          <label>Budget :</label>
+        </div>
+        <div class="col-xs-4">
+          <input class="form-control" type="number" min="1" id="ex3" disabled>
+        </div>
+        <div class="col-xs-2">
+          F cfa
+        </div>
+      </div>-->
+    </div>
+    <div class="col-xs-4">
+      <div class="row">
+        <div class="col-xs-6" style="text-align: right;">
+          <label>Lieu :</label>
+        </div>
+        <div class="col-xs-6">
+          <!--<textarea class="form-control" name="place" ng-model="event.where" disabled></textarea>-->
+          {{event.where}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6" style="text-align: right;">
+          <label>Organisateur (trice) :</label>
+        </div>
+        <div class="col-xs-6">
+          <!--<input class="form-control" name="planner" ng-model="event.owner" disabled>-->
+          {{event.owner}}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div align="center">
+        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+        <input id="profile-image-upload" class="hidden" type="file">
+        <div style="color:#999;" >Cliquer ici pour changer la photo</div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!--<div class="tab-content">
+    <div id="homeBar" class="row">
+      <div class="col-md-5" style="margin-top: 7px;">
+        <span>{{evtName}}</span>
+      </div>
+      <div class="btn-group col-md-3">
+        <label class="btn btn-primary" id="DMBack" ng-class="{'active':!isFullScreen}">
+          <input type="radio" name="options" autocomplete="off" value="DMBack" ng-model="displayMode" ng-checked="!isFullScreen">Backend
+        </label>
+        <label class="btn btn-primary" id="DMFront" ng-class="{'active':isFullScreen}">
+          <input type="radio" name="options" autocomplete="off" value="DMFront" ng-model="displayMode" ng-click="goFullScreen()" ng-checked="isFullScreen">Frontend
+        </label>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-large btn-primary" ng-click="saveMap()">Sauvegarder</button>
+        <button class="btn btn-large btn-primary">Print</button>
+        &lt;!&ndash;<label class="btn btn-primary">
+          Importer&hellip; <input type="file" style="display: none;">
+        </label>&ndash;&gt;
+        &lt;!&ndash;<input type="file" id ="importFile" />&ndash;&gt;
+        <button class="btn btn-large btn-primary" data-toggle="modal" data-target="#importModal">Importer</button>
+      </div>
+      <div class="col-md-1">
+        <span> 14 tables <br> 30 places</span>
+      </div>
+    </div>
+  </div>-->
+
+  <!-- Tab panes -->
+  <ul class="nav nav-tabs" role="tablist" id="myHomeTabs">
+    <li role="presentation"><a href="#guestsTab">Liste des Invités</a></li>
+    <li role="presentation" class="active"><a href="#mapTab">Plan de table</a></li>
+  </ul>
+
+  <div class="tab-content" style="padding-top: 10px; padding-bottom: 10px;">
+    <div role="tabpanel" class="tab-pane" id="guestsTab">
+      <div class="row">
+        <div class="form-group col-md-2 col-sm-3">
+          <input class="form-control" ng-model="searchedGuest" placeholder="Rechercher"/>
+          <i class="glyphicon glyphicon-search"></i>
+        </div>
+        <!--<div class="form-group col-xs-2">
+          <button class="btn btn-large btn-primary" ng-click="addGuest()">Nouveau invité</button>
+        </div>-->
+      </div>
+
+      <div ng-repeat="guest in guests | orderBy:['firstName','name','title','position'] | searchedGuestFilter:searchedGuest">
+        <div class="row guestBlock" ng-click="">
+          <div class="col col-md-2 col-sm-1">
+            <i class="cui-user-female"></i>
+          </div>
+          <div class="col col-md-3 col-sm-3">
+<!--            <span>{{guest.name}} {{guest.firstName}}</span>-->
+          </div>
+          <div class="col col-md-2 col-sm-3">
+<!--            <i class="cui-screen-smartphone"></i>&nbsp;{{guest.phoneNumber}}-->
+          </div>
+          <div class="col col-md-2 col-sm-2">
+<!--            <i class="cui-envelope-closed"></i>&nbsp;{{guest.email}}-->
+          </div>
+          <div class="col col-md-3 col-sm-3">
+<!--            <i class="cui-location-pin"></i>&nbsp;Table {{guest.table}}, place {{guest.seat}}-->
+          </div>
+        </div>
+
+        <div class="row guestInfoBlock">
+          <div class="col-md-2" ng-click="goToRoom(event)">
+            <img src="assets/img/appli.png" alt="">
+          </div>
+          <div class="form-group col-md-10">
+            <div class="row">
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Nom :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="lastName" placeholder="Nom" required></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                &nbsp;
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Téléphone :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="phoneNunmber" placeholder="Téléphone" required></div>
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Prénom :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="firstName" placeholder="Prénom" required></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                &nbsp;
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Email :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="email" placeholder="Email" required></div>
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Sexe :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="sexe" placeholder="Sexe" required></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                &nbsp;
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Table :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="position" placeholder="Numéro de table" required></div>
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                <i class="glyphicon glyphicon-ok" style="color: #337ab7;"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Date de naissance :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="birthday" placeholder="Date de naissance" required></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                &nbsp;
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><label>Accompagné(e) de :</label></div>
+              </div>
+              <div class="col col-md-2 col-sm-2">
+                <div class="row"><input class="form-control" name="friend" placeholder="Avec" required></div>
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                &nbsp;
+              </div>
+              <div class="col col-md-1 col-sm-1">
+                <i class="glyphicon glyphicon-trash"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane active" id="mapTab">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Ajouter une table
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-submenu">
+            <a tabindex="-1" href="#">Rectangle<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a tabindex="-1" href="#" ng-click="addTable('R3')">3 places</a></li>
+              <li><a tabindex="-1" ng-click="addTable('R4')">4 places</a></li>
+              <li><a tabindex="-1" ng-click="addTable('R6')">6 places</a></li>
+              <li><a tabindex="-1" ng-click="addTable('R8')">8 places</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a tabindex="-1" href="#">Ronde<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a tabindex="-1" href="#" ng-click="addTable('C8')">8 places</a></li>
+            </ul>
+          </li>
+        </ul>
+        <button ng-click="triggerPosition()">Déclencher la position</button><br/>
+      </div>
+
+      <div id="myFlexDiv">
+        <!--<div id="myGuests"></div>-->
+        <gojs-palette #myPalette [initPalette]='initPalette' [divClassName]='paletteDivClassName' [nodeDataArray]='paletteNodeData'
+                      [linkDataArray]='paletteLinkData' [modelData]='paletteModelData' (modelChange)='paletteModelChange($event)' [skipsPaletteUpdate]='skipsPaletteUpdate'></gojs-palette>
+
+        <!-- a go-diagram element referring to the model, originally written as: -->
+        <!-- &lt;go-diagram go-model="model" style="border: solid 1px blue; width:100%; height:400px"&gt;&lt;/go-diagram&gt; -->
+        <!--<app-go-diagram go-model="model" guest-list="guestList" ng-model="map" style="border: solid 1px black;"></app-go-diagram>-->
+        <gojs-diagram #myDiagram [initDiagram]='initDiagram' [nodeDataArray]='diagramNodeData' [linkDataArray]='diagramLinkData'
+                      [divClassName]='diagramDivClassName' [modelData]='diagramModelData' [skipsDiagramUpdate]='skipsDiagramUpdate'
+                      (modelChange)='diagramModelChange($event)'>
+        </gojs-diagram>
+      </div>
+
+      Overview
+      <gojs-overview #myOverview [initOverview]='initOverview' [divClassName]='oDivClassName' [observedDiagram]='observedDiagram'></gojs-overview>
+
+      <!--list guest : {{guestList.nodeDataArray}}
+      <br/>
+      guest selected : {{guestList.selectedNodeData}}
+      <br/>
+      Number of node data: {{model.nodeDataArray.length}}
+      <br />
+      Alpha node location: {{model.findNodeDataForKey(1).loc}}
+      <br />
+      Selected node: {{model.selectedNodeData.key}} <input ng-model="model.selectedNodeData.name"/>
+      <br />
+      Number of link data: {{model.linkDataArray.length}}
+      <br/>
+      model.nodeDataArray : {{model.nodeDataArray}}
+      <br/>
+      model : {{model}}-->
+      <div id="savedModel"></div>
+      <p>
+        You can also replace the <a>Diagram.model</a> just by setting the "model" property on the $scope,
+        since the "goDiagram" directive watches that property for changes.
+      </p>
+      <button (click)="replaceModel()">Replace Model</button>
+    </div>
+  </div>
+  <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="importModalLabel">Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <label class="input-group-btn">
+            <span class="btn btn-primary">
+                Browse&hellip; <input type="file" style="display: none;" multiple>
+            </span>
+            </label>
+            <input class="form-control" readonly>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" (click)="import()">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

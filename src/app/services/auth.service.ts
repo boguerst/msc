@@ -12,7 +12,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  private user: any = null;
+  private userData: any;
   userSubject = new Subject<User>();
 
   constructor(
@@ -21,12 +21,12 @@ export class AuthService {
     private router: Router,
     private ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
-    /* Saving user data in localstorage when
+    /* Saving userData data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user));
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
       } else {
         localStorage.setItem('user', null);
@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   emitUser(u?) {
-    this.userSubject.next(u ? u : this.user);
+    this.userSubject.next(u ? u : this.userData);
   }
 
   /*signin(email: string, password: string) {
@@ -44,7 +44,7 @@ export class AuthService {
       (resolve, reject) => {
         firebase.auth().signInWithEmailAndPassword(email, password).then(
           () => {
-            this.user = new User(email, email, password);
+            this.userData = new User(email, email, password);
             this.emitUser();
             resolve();
           },
@@ -58,7 +58,8 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password)
     .then((result) => {
       this.ngZone.run(() => {
-        this.router.navigate(['dashboard']);
+        localStorage.setItem('user', JSON.stringify(result.user));
+        this.router.navigate(['mySpace']);
       });
       this.SetUserData(result.user);
     }).catch((error) => {
@@ -79,19 +80,22 @@ export class AuthService {
       });
   }*/
   // Sign up with email/password
-  SignUp(email, password) {
-    return this.afAuth.createUserWithEmailAndPassword(email, password)
+  SignUp(user) {
+    return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
     .then((result) => {
-      /* Call the SendVerificationMail() function when new user sign
+      /* Call the SendVerificationMail() function when new userData sign
       up and returns promise */
       this.SendVerificationMail();
+      result.user.updateProfile({
+        displayName: user.displayName
+      });
       this.SetUserData(result.user);
     }).catch((error) => {
       window.alert(error.message);
     });
   }
 
-  // Send email verfificaiton when new user sign up
+  // Send email verfificaiton when new userData sign up
   SendVerificationMail() {
     return this.afAuth.currentUser.then(u => u.sendEmailVerification())
     .then(() => {
@@ -109,12 +113,12 @@ export class AuthService {
     });
   }
 
-  isLogged() {
-    return this.user != null;
+  /*isLogged() {
+    return this.userData != null;
     // firebase.auth().isSignInWithEmailLink();
-  }
+  }*/
 
-  // Returns true when user is looged in and email is verified
+  // Returns true when userData is logged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user !== null && user.emailVerified !== false);
@@ -138,22 +142,26 @@ export class AuthService {
     });
   }
 
-  // Setting up user data when sign in with username/password,
+  // Setting up userData data when sign in with username/password,
   // sign up with username/password and sign in with social auth
   // provider in Firestore database using AngularFirestore + AngularFirestoreDocument service
   SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const userData: User = new User(user.pseudo, user.email, user.password, user.uid);
-      // displayName: user.displayName,
-      // photoURL: user.photoURL,
-      // emailVerified: user.emailVerified
+    const userData = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      // profile: user.profile,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified
+    };
     return userRef.set(userData, {
       merge: true
     });
   }
 
   /*signout() {
-    this.user = null;
+    this.userData = null;
     firebase.auth().signOut();
   }*/
 
@@ -161,7 +169,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['signin']);
     });
   }
 }

@@ -28,14 +28,14 @@ export class SignupComponent implements OnInit {
   initForm() {
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
+      displayName: ['', [Validators.required, Validators.maxLength(15)]],
+      profile: ['', [Validators.required/*, Validators.maxLength(1), Validators.pattern(/[A-Z]/)*/]]
       });
   }
 
   onSubmit() {
-    const email = this.signupForm.value.email;
-    const password = this.signupForm.value.password;
-    this.authService.SignUp(email, password).then(
+    this.authService.SignUp(this.signupForm.value).then(
       () => {
         this.router.navigate(['/mySpace']);
       },

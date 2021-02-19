@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import * as firebase from 'firebase';
 
-import { User } from './models/user';
+// import { User } from './models/user';
 
 import { AuthService } from './services/auth.service';
 
@@ -16,30 +15,24 @@ export class AppComponent {
   pseudo: string;
   userSubscription: Subscription;
 
-  constructor(private authService: AuthService) {
-    /*const firebaseConfig = {
-      apiKey: 'AIzaSyDjXmABWsHaf069HqxkfqEtf7RHW4dDdsc',
-      authDomain: 'mscdb-3dcc4.firebaseapp.com',
-      databaseURL: 'https://mscdb-3dcc4.firebaseio.com',
-      projectId: 'mscdb-3dcc4',
-      storageBucket: 'mscdb-3dcc4.appspot.com',
-      messagingSenderId: '937692415291',
-      appId: '1:937692415291:web:afbbed639607d0523ba31e'
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);*/
-  }
+  constructor(private authService: AuthService) {}
 
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngOnInit() {
+  /*ngOnInit() {
     this.userSubscription = this.authService.userSubject.subscribe(
       (user: User) => {
-        this.pseudo = user.getPseudo();
+        // this.pseudo = user.getPseudo();
       });
+  }*/
+
+  /*ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+  }*/
+
+  signOut() {
+    this.authService.SignOut();
   }
 
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+  isLoggedIn() {
+    return this.authService.isLoggedIn;
   }
 }
