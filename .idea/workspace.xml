@@ -2,14 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aaac99b7-7dc0-4703-90e7-2f8b325b18c6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/msc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/msc.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/firebase-auth-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/firebase-auth-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/firebase-auth-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/firebase-auth-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/firebase-auth-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/firebase-auth-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/firebase-auth-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/firebase-auth-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/main-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/main-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/main-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/main-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/main-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/main-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/polyfills-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/polyfills-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/polyfills-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/polyfills-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/polyfills-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/polyfills-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/polyfills-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/polyfills-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/runtime-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/runtime-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/runtime-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/runtime-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/runtime-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/runtime-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/scripts.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/scripts.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/styles-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/styles-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/styles-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/styles-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/styles-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/styles-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/vendor-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/vendor-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/msc/vendor-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/msc/vendor-es2015.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/my-event/my-event.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/my-event/my-event.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/polyfills.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,6 +315,7 @@
       <workItem from="1615993480957" duration="284000" />
       <workItem from="1615995231710" duration="589000" />
       <workItem from="1619630722839" duration="6395000" />
+      <workItem from="1619950707998" duration="2071000" />
     </task>
     <task id="LOCAL-00001" summary="Indemtation">
       <created>1541349669985</created>
