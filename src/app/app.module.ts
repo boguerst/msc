@@ -10,6 +10,8 @@ import { OrderModule } from 'ngx-order-pipe';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { environment } from '../environments/environment';
 
 import { AuthGuard } from './guards/auth.guard';
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     MatCheckboxModule,*/
     OrderModule,
     FilterPipeModule,
-    GojsAngularModule
+    GojsAngularModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
